@@ -19,7 +19,7 @@ services:
         environment:
           - TZ=America/Argentina/Buenos_Aires
         ports:
-            - 8080:80
+            - 8081:80
         links:
             - db
         networks:
