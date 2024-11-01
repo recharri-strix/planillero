@@ -1,7 +1,5 @@
 FROM php:8.2-fpm
 
-ARG user
-ARG uid
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -34,6 +32,6 @@ RUN composer install --no-dev --optimize-autoloader --no-scripts
 
 COPY . .
 
-RUN chown -R $uid:$uid /var/www
+RUN chmod 777 /var/www -R
 
 EXPOSE 80
