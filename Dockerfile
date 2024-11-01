@@ -41,5 +41,7 @@ RUN php artisan key:generate
 
 RUN chmod 777 /var/www/html/ -R
 
+ENV APP_URL https://app.planeadoreslaplata.org.ar
+
 # Exponer el puerto 80 para el servicio web
 EXPOSE 80
