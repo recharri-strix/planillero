@@ -12,9 +12,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install zip pdo pdo_mysql
-RUN docker-php-ext-install mysqli
-RUN docker-php-ext-install mbstring
-RUN docker-php-ext-install gd
+#RUN docker-php-ext-install mysqli
+#RUN docker-php-ext-install mbstring
+#RUN docker-php-ext-install gd
 
 RUN a2enmod rewrite
 
