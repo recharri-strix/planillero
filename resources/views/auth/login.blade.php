@@ -7,7 +7,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Login - SB Admin Pro</title>
-        <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
+        <!-- <link href="{{asset('css/styles.css')}}" rel="stylesheet" /> -->
+        <link href=""https://app.planeadoreslaplata.org.ar/css/styles.css"" rel="stylesheet" />
         <link rel="icon" type="image/x-icon" href='{{asset("assets/img/favicon.png")}}' />     
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
