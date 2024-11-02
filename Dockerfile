@@ -1,40 +1,35 @@
-# Usa la imagen oficial de PHP con Apache
-FROM php:8.1-apache
+FROM php:8.2.25-apache
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Establece el directorio de trabajo
-WORKDIR /var/www/html/planillero
+WORKDIR /var/www/html
 
-# Instalar las extensiones necesarias para MySQL
-RUN apt-get update && apt-get install -y default-mysql-client \
-    && docker-php-ext-install pdo pdo_mysql
+RUN apt-get update \
+    && apt-get install -y libpng-dev \
+    && apt-get install -y libzip-dev \
+    && apt-get install -y zlib1g-dev \
+    && apt-get install -y libonig-dev nano mc \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install zip pdo pdo_mysql
+
+RUN a2enmod rewrite
+
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN service apache2 restart
 
 # Copiar los archivos de la aplicación al contenedor
 COPY . .
 
-# Cambiar el propietario de los archivos
-RUN chown -R www-data:www-data /var/www/html/planillero
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Habilitar el módulo de reescritura de Apache
-RUN a2enmod rewrite
+RUN composer install
 
-# Configurar el archivo de VirtualHost para Apache
-RUN echo "<VirtualHost *:80> \n\
-    ServerName docker.planillero \n\
-    DocumentRoot /var/www/html/planillero \n\
-    <Directory /var/www/html/planillero> \n\
-        Options Indexes FollowSymLinks \n\
-        AllowOverride All \n\
-        Require all granted \n\
-    </Directory> \n\
-    ErrorLog ${APACHE_LOG_DIR}/error.log \n\
-    CustomLog ${APACHE_LOG_DIR}/access.log combined \n\
-</VirtualHost>" > /etc/apache2/sites-available/000-default.conf
+RUN mv .env.example .env
 
-# Configurar PHP para mostrar errores
-RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/docker-php-errors.ini
+RUN php artisan key:generate
 
-# Copiar el archivo de respaldo de la base de datos (si aplica)
-COPY /database/dumps/dump_planillero.sql /shared_data/backup.sql
+RUN chmod 777 /var/www/html/ -R
 
 # Exponer el puerto 80 para el servicio web
 EXPOSE 80
