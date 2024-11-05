@@ -61,7 +61,7 @@
                                             <td>{{ $item->id}}</td>
                                             <td>{{ $item->fecha }}</td>
                                             <td>{{ $item->jefeCampo->name }}</td>
-                                            <td>{{ $item->novedades }}</td>
+                                            <!-- <td>{{ $item->novedades }}</td> -->
                                             <td class="td-actions">
                                                 <a class="btn btn-sm btn-success"
                                                     href="{{ route('vuelos.index', $item->id)}}"
