@@ -59,7 +59,7 @@
                                     @foreach ($planillas as $item)
                                         <tr>
                                             <td>{{ $item->id}}</td>
-                                            <td>{{ $item->fecha }}</td>
+                                            <td>{{ date('d-m-Y', strtotime($item->fecha)) }}</td>
                                             <td>{{ $item->jefeCampo->name }}</td>
                                             <!-- <td>{{ $item->novedades }}</td> -->
                                             <td class="td-actions">
