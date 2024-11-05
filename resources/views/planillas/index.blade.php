@@ -10,6 +10,9 @@
                             <span id="card_title">
                                 {{ __('Planillas de vuelos') }}
                             </span>
+                            <div class="form-group col-md-4 d-flex align-items-end">
+                                <a href="{{ route('planillas.nueva') }}" class="btn btn-info btn-sm">Nueva Planilla</a>
+                            </div>
                         </div>
                     </div>
 
@@ -17,7 +20,7 @@
                         <form id="reportForm" action="{{ route('planillas.filtrar') }}" method='GET'>
                             {{-- @csrf --}}
                             <div class="row">
-                                <div class="form-group col-md-3">
+                                {{-- <div class="form-group col-md-3">
                                     <label class="small mb-1" for="jefe_campo_id">Jefe de campo</label>
                                     <select class="form-select form-select-sm select2" id="jefe_campo_id"
                                         name="jefe_campo_id">
@@ -28,7 +31,7 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-md-2">
                                     <label class="small mb-1" for="fecha">Fecha</label>
@@ -37,9 +40,6 @@
                                 </div>
                                 <div class="form-group col-md-2 d-flex align-items-end">
                                     <button id="submitInputs" class="btn btn-primary btn-sm" type="submit">Filtrar</button>
-                                </div>
-                                <div class="form-group col-md-4 d-flex align-items-end">
-                                    <a href="{{ route('planillas.nueva') }}" class="btn btn-info btn-sm">Nueva Planilla</a>
                                 </div>
                             </div>
                         </form>

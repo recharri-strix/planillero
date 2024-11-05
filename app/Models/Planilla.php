@@ -37,8 +37,8 @@ class Planilla extends Model
         return $this->belongsTo(Temperatura::class, 'temperatura_id');
     }
 
-    public function vuelos()
+    public function nube()
     {
-        return $this->hasMany(Vuelo::class, 'planilla_id');
+        return $this->belongsTo(Nube::class, 'nube_id');
     }
 }

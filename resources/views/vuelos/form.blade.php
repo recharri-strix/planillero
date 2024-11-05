@@ -1,7 +1,6 @@
 <!-- resources/views/vuelos/form.blade.php -->
 
 <input type="hidden" name="planilla_id" value="{{ $planilla_id }}">
-<input type="hidden" name="id" value="{{ $vuelo->id ?? '' }}">
 
 <!-- Select para Tema -->
 <label for="tema_id">Tema:</label>
@@ -71,7 +70,7 @@
 
 <!-- Select para Tipo de Pago -->
 <label for="tipo_pago_id">Tipo de Pago:</label>
-<select class="form-select" id="tipo_pago_id" name="tipo_pago_id" required>
+<select class="form-select" id="tipo_pago_id" name="tipo_pago_id" >
     <option value="">Seleccione el tipo de pago</option>
     @foreach($tiposPago as $pago)
         <option value="{{ $pago->id }}" {{ old('tipo_pago_id', $vuelo->tipo_pago_id ?? '') == $pago->id ? 'selected' : '' }}>
@@ -82,18 +81,18 @@
 
 <!-- Campo de Decolaje -->
 <label for="decolaje">Decolaje:</label>
-<input class="form-control" type="datetime-local" id="decolaje" name="decolaje" value="{{ old('decolaje', $vuelo->decolaje ?? '') }}">
+<input class="form-control" type="time" id="decolaje" name="decolaje" value="{{ old('decolaje', $vuelo->hora_decolaje) }}">
 
 <!-- Campo de Corte -->
 <label for="corte">Corte:</label>
-<input class="form-control" type="datetime-local" id="corte" name="corte" value="{{ old('corte', $vuelo->corte ?? '') }}">
+<input class="form-control" type="time" id="corte" name="corte" value="{{ old('corte', $vuelo->hora_corte) }}">
 
 <!-- Campo de Aterrizaje -->
 <label for="aterrizaje">Aterrizaje:</label>
-<input class="form-control" type="datetime-local" id="aterrizaje" name="aterrizaje" value="{{ old('aterrizaje', $vuelo->aterrizaje ?? '') }}">
+<input class="form-control" type="time" id="aterrizaje" name="aterrizaje" value="{{ old('aterrizaje', $vuelo->hora_aterrizaje) }}">
 
 <!-- Campo de Aterrizaje del Avión -->
 <label for="aterrizaje_avion">Aterrizaje del Avión:</label>
-<input class="form-control" type="datetime-local" id="aterrizaje_avion" name="aterrizaje_avion" value="{{ old('aterrizaje_avion', $vuelo->aterrizaje_avion ?? '') }}">
+<input class="form-control" type="time" id="aterrizaje_avion" name="aterrizaje_avion" value="{{ old('aterrizaje_avion', $vuelo->hora_aterrizaje_avion) }}">
 
 <button class="form-control btn btn-primary mt-3" type="submit">Guardar</button>

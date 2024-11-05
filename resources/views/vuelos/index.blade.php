@@ -14,6 +14,9 @@
                                 <a href="{{ route('vuelos.nueva', $planilla_id) }}" class="btn btn-info btn-sm">Nuevo
                                     vuelo</a>
                             </div>
+                            <div class="form-group col-md-4 d-flex push-right">
+                                <a href="{{ route('vuelos.imprimir', $planilla_id) }}" class="btn btn-warning btn-sm">Imprimir planilla</a>
+                            </div>
                         </div>
                     </div>
 
@@ -59,7 +62,7 @@
                                         <th>Decolaje</th>
                                         <th>Corte</th>
                                         <th>Aterrizaje</th>
-                                        <th>Liberado</th>
+                                        <th>Librado</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -70,22 +73,15 @@
                                             <td>{{ $item->tema->nombre }}</td>
                                             <td>{{ $item->piloto->name }}</td>
                                             <td>{{ $item->planeador->nombre }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($item->decolaje)->format('H:i') }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($item->corte)->format('H:i') }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($item->aterrizaje)->format('H:i') }}</td>
+                                            <td>{{ $item->decolaje ? \Carbon\Carbon::parse($item->decolaje)->format('H:i') : '' }}</td>
+                                            <td>{{ $item->corte ? \Carbon\Carbon::parse($item->corte)->format('H:i') : '' }}</td>
+                                            <td>{{ $item->aterrizaje ? \Carbon\Carbon::parse($item->aterrizaje)->format('H:i') : '' }}</td>
                                             <td>   
-                                                @if($item->corte && $item->aterrizaje)
-                                                    @php
-                                                        $corte = \Carbon\Carbon::parse($item->corte);
-                                                        $aterrizaje = \Carbon\Carbon::parse($item->aterrizaje);
-                                                        $diferencia = $aterrizaje->diff($corte); 
-                                                    @endphp
-                                                    {{ $diferencia->format('%H:%I') }}
-                                                @endif
+                                                {{ $item->hora_librado }}
                                             </td>
                                             <td class="td-actions">
                                                 <a class="btn btn-sm btn-success"
-                                                    href="{{ route('vuelos.index', $item->id) }}" data-bs-toggle="tooltip"
+                                                    href="{{ route('vuelos.editar', $item->id) }}" data-bs-toggle="tooltip"
                                                     data-bs-placement="top" data-bs-title="Ver planilla de vuelos">
                                                     <i class="fa fa-fw fa-edit"></i></a>
                                             </td>

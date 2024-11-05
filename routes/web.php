@@ -30,3 +30,4 @@ Route::get('/vuelos/nueva/{id}', [VuelosController::class, 'nueva'])->name('vuel
 Route::get('/vuelos/{id}/vuelos', [VuelosController::class, 'index'])->name('vuelos.index');
 Route::get('/vuelos/editar/{id}', [VuelosController::class, 'editar'])->name('vuelos.editar');
 Route::post('/vuelos/store/{id?}', [VuelosController::class, 'store'])->name('vuelos.store');
+Route::get('/vuelos/imprimir/{id}', [VuelosController::class, 'imprimir'])->name('vuelos.imprimir');
