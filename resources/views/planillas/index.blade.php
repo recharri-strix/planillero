@@ -51,7 +51,7 @@
                                         <th>Nro</th>
                                         <th>Fecha</th>
                                         <th>Jefe de campo</th>
-                                        <th>Novedades</th>
+                                        <!-- <th>Novedades</th> -->
                                         <th></th>
                                     </tr>
                                 </thead>
