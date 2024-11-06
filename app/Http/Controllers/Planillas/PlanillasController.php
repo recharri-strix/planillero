@@ -96,8 +96,8 @@ class PlanillasController extends Controller
         }
 
         // Crear o actualizar planilla
-        if ($id) {
-            $planilla = Planilla::findOrFail($id);
+        if ($request->id) {
+            $planilla = Planilla::findOrFail($request->id);
         } else {
             $planilla = new Planilla();
         }
@@ -110,11 +110,8 @@ class PlanillasController extends Controller
         $planilla->nube_id = $validatedData['nube_id'];
         $planilla->plafon_id = $validatedData['plafon_id'];
         $planilla->novedades = htmlspecialchars($validatedData['novedades'], ENT_QUOTES, 'UTF-8');
-
-        // Guardar planilla en la base de datos
         $planilla->save();
 
-        // Redirigir con un mensaje de éxito
         return redirect()->route('planillas.index')->with('success', 'Planilla guardada exitosamente.');
     }
     
