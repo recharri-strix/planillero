@@ -2,7 +2,7 @@
 
     <!-- Campo de Fecha -->
     <label for="fecha">Fecha:</label>
-    <input class="form-control" type="datetime-local" id="fecha" name="fecha" value="{{ old('fecha', $planilla->fecha ?? '') }}" required>
+    <input class="form-control" type="date" id="fecha" name="fecha" value="{{ old('fecha', $planilla->fecha_im ?? '') }}" required>
 
     <!-- Select para Jefe de Campo -->
     <label for="jefe_campo_id">Jefe de Campo:</label>

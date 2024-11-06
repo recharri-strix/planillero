@@ -4,7 +4,7 @@
 
 <!-- Select para Tema -->
 <label for="tema_id">Tema:</label>
-<select class="form-select" id="tema_id" name="tema_id" required>
+<select class="form-select" id="tema_id" name="tema_id" >
     <option value="">Seleccione un tema</option>
     @foreach($temas as $tema)
         <option value="{{ $tema->id }}" {{ old('tema_id', $vuelo->tema_id ?? '') == $tema->id ? 'selected' : '' }}>
@@ -59,7 +59,7 @@
 
 <!-- Select para Instructor -->
 <label for="instructor_id">Instructor:</label>
-<select class="form-select" id="instructor_id" name="instructor_id" required>
+<select class="form-select" id="instructor_id" name="instructor_id" >
     <option value="">Seleccione un instructor</option>
     @foreach($instructores as $instructor)
         <option value="{{ $instructor->id }}" {{ old('instructor_id', $vuelo->instructor_id ?? '') == $instructor->id ? 'selected' : '' }}>

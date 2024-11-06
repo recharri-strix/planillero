@@ -81,6 +81,21 @@ class Vuelo extends Model
 
         return null;
     }
+    public function getTemaNombreAttribute()
+    {
+        $tema = $this->tema()->first();
+        return $tema ? $tema->nombre : "";
+    }
+
+    public function getInstructorAttribute()
+    {
+        return $this->instructor()->first() ?: null;
+    }
+    
+    public function getFormaPagoAttribute()
+    {
+        return $this->tipoPago()->first() ?: null;
+    }
 
     public function planilla()
     {

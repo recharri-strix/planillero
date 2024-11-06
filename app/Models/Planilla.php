@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,15 @@ class Planilla extends Model
         'vel_viento_id', 'temperatura_id', 'nube_id', 
         'plafon_id', 'novedades'
     ];
+    public function getFechaTbAttribute()
+    {
+        return $this->fecha ? Carbon::parse($this->fecha)->format('d/m/Y') : null;
+    }
+ 
+    public function getFechaImAttribute()
+{
+    return $this->fecha ? Carbon::parse($this->fecha)->format('Y-m-d') : null;
+}
 
     public function jefeCampo()
     {
@@ -40,5 +50,10 @@ class Planilla extends Model
     public function nube()
     {
         return $this->belongsTo(Nube::class, 'nube_id');
+    }
+    
+    public function plafon()
+    {
+        return $this->belongsTo(plafon::class, 'plafon_id');
     }
 }

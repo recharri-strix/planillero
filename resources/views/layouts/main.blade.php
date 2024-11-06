@@ -15,7 +15,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"> </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@9.1.0/dist/style.min.css">
-    @livewireStyles
 </head>
 
 <body class="nav-fixed">
@@ -39,6 +38,5 @@
     <script src="{{asset('js/datatables/datatables-simple-demo.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.1.0/dist/umd/simple-datatables.min.js"></script>
 </body>
-@livewireScripts
-@stack('scriptscreateenc')
+{{-- @stack('scriptscreateenc') --}}
 {{-- </html> --}}
