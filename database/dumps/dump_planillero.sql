@@ -27,7 +27,7 @@ CREATE TABLE `cache` (
   `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +81,7 @@ CREATE TABLE `failed_jobs` (
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +107,7 @@ CREATE TABLE `formas_pagos` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `job_batches` (
   `created_at` int NOT NULL,
   `finished_at` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `jobs` (
   `created_at` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jobs_queue_index` (`queue`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +198,7 @@ CREATE TABLE `maquinas` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,7 +223,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +275,7 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,7 +304,7 @@ CREATE TABLE `pilotos` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,8 +352,8 @@ DROP TABLE IF EXISTS `planillas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `planillas` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `fecha` datetime DEFAULT NULL,
-  `jefe_campo_id` int DEFAULT NULL,
+  `fecha` datetime not null,
+  `jefe_campo_id` int not null,
   `dir_viento_id` int DEFAULT NULL,
   `vel_viento_id` int DEFAULT NULL,
   `temperatura_id` int DEFAULT NULL,
@@ -364,7 +364,7 @@ CREATE TABLE `planillas` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -373,8 +373,8 @@ CREATE TABLE `planillas` (
 
 LOCK TABLES `planillas` WRITE;
 /*!40000 ALTER TABLE `planillas` DISABLE KEYS */;
-INSERT INTO `planillas` VALUES (1,'2024-10-28 18:13:00',1,25,26,27,5,35,'nada','2024-10-29 00:24:58','2024-10-29 00:24:58',NULL),(2,'2024-10-29 18:36:00',1,18,24,24,5,29,'nada 2','2024-10-29 00:36:36','2024-10-29 00:36:36',NULL);
-/*!40000 ALTER TABLE `planillas` ENABLE KEYS */;
+/* INSERT INTO `planillas` VALUES (1,'2024-10-28 18:13:00',1,25,26,27,5,35,'nada','2024-10-29 00:24:58','2024-10-29 00:24:58',NULL),(2,'2024-10-29 18:36:00',1,18,24,24,5,29,'nada 2','2024-10-29 00:36:36','2024-10-29 00:36:36',NULL);
+ *//*!40000 ALTER TABLE `planillas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -389,7 +389,7 @@ CREATE TABLE `presion` (
   `valor` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -415,7 +415,7 @@ CREATE TABLE `presiones` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -445,7 +445,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`user_id`),
   KEY `sessions_last_activity_index` (`last_activity`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -473,7 +473,7 @@ CREATE TABLE `temas` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -500,7 +500,7 @@ CREATE TABLE `temperaturas` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -534,7 +534,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -611,13 +611,13 @@ DROP TABLE IF EXISTS `vuelos`;
 CREATE TABLE `vuelos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `planilla_id` int NOT NULL,
-  `tema_id` int NOT NULL,
+  `tema_id` int NULL,
   `piloto_id` int NOT NULL,
-  `avion_id` int NOT NULL,
-  `remolcador_id` int NOT NULL,
-  `planeador_id` int NOT NULL,
-  `instructor_id` int NOT NULL,
-  `tipo_pago_id` int NOT NULL,
+  `avion_id` int NULL,
+  `remolcador_id` int NULL,
+  `planeador_id` int NULL,
+  `instructor_id` int NULL,
+  `tipo_pago_id` int NULL,
   `decolaje` datetime DEFAULT NULL,
   `corte` datetime DEFAULT NULL,
   `aterrizaje` datetime DEFAULT NULL,
@@ -626,7 +626,7 @@ CREATE TABLE `vuelos` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -635,8 +635,8 @@ CREATE TABLE `vuelos` (
 
 LOCK TABLES `vuelos` WRITE;
 /*!40000 ALTER TABLE `vuelos` DISABLE KEYS */;
-INSERT INTO `vuelos` VALUES (1,2,1,1,14,1,1,1,1,'2024-10-29 11:14:00','2024-10-29 11:20:00','2024-10-29 12:14:00','2024-10-29 11:24:00','2024-10-29 18:17:02','2024-10-29 15:39:33',NULL),(2,2,1,1,15,1,2,1,1,'2024-10-29 14:14:00','2024-10-29 14:18:00','2024-10-29 14:24:00','2024-10-29 14:20:00','2024-10-29 18:17:58','2024-10-29 15:39:33',NULL),(3,2,1,1,14,1,3,1,4,'2024-10-29 13:38:00','2024-10-29 13:44:00',NULL,NULL,'2024-10-29 19:45:13','2024-10-29 19:45:13',NULL);
-/*!40000 ALTER TABLE `vuelos` ENABLE KEYS */;
+/* INSERT INTO `vuelos` VALUES (1,2,1,1,14,1,1,1,1,'2024-10-29 11:14:00','2024-10-29 11:20:00','2024-10-29 12:14:00','2024-10-29 11:24:00','2024-10-29 18:17:02','2024-10-29 15:39:33',NULL),(2,2,1,1,15,1,2,1,1,'2024-10-29 14:14:00','2024-10-29 14:18:00','2024-10-29 14:24:00','2024-10-29 14:20:00','2024-10-29 18:17:58','2024-10-29 15:39:33',NULL),(3,2,1,1,14,1,3,1,4,'2024-10-29 13:38:00','2024-10-29 13:44:00',NULL,NULL,'2024-10-29 19:45:13','2024-10-29 19:45:13',NULL);
+ *//*!40000 ALTER TABLE `vuelos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
