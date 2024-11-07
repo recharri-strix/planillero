@@ -23,9 +23,9 @@ class Planilla extends Model
     }
  
     public function getFechaImAttribute()
-{
-    return $this->fecha ? Carbon::parse($this->fecha)->format('Y-m-d') : null;
-}
+    {
+        return $this->fecha ? Carbon::parse($this->fecha)->format('Y-m-d') : null;
+    }
 
     public function jefeCampo()
     {
@@ -54,6 +54,6 @@ class Planilla extends Model
     
     public function plafon()
     {
-        return $this->belongsTo(plafon::class, 'plafon_id');
+        return $this->belongsTo(Plafon::class, 'plafon_id');
     }
 }

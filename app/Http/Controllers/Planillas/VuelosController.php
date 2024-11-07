@@ -25,7 +25,7 @@ class VuelosController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->with(['planilla', 'piloto', 'avion', 'remolcador', 'planeador', 'instructor', 'tema'])->paginate(30);
 
-     return view('vuelos.index', compact('vuelos', "planilla_id"));
+        return view('vuelos.index', compact('vuelos', "planilla_id"));
     }
 
     /**
@@ -36,9 +36,9 @@ class VuelosController extends Controller
         $temas = Tema::get();
         $pilotos = User::get();
         $aviones = Maquina::where("tipo", "avion")->get();
-        $remolcadores = User::get();
+        $remolcadores = User::where('tipo', 'like', '%REM%')->get();
         $planeadores = Maquina::where("tipo", "planeador")->get();
-        $instructores = User::get();
+        $instructores = User::where('tipo', 'like', '%INS%')->get();
         $tiposPago = FormaPago::all();
         $vuelo = new Vuelo();
 
@@ -66,9 +66,9 @@ class VuelosController extends Controller
         $temas = Tema::get();
         $pilotos = User::get();
         $aviones = Maquina::where("tipo", "avion")->get();
-        $remolcadores = User::get();
+        $remolcadores = User::where('tipo', 'like', '%REM%')->get();
         $planeadores = Maquina::where("tipo", "planeador")->get();
-        $instructores = User::get();
+        $instructores = User::where('tipo', 'like', '%INS%')->get();
         $tiposPago = FormaPago::all();
 
         // Retornar la vista con las variables cargadas
