@@ -530,6 +530,7 @@ CREATE TABLE `users` (
   `telefono` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dni` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cambio_password` varchar(1) COLLATE utf8mb4_unicode_ci DEFAULT '1',
+  tipo varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -543,7 +544,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Juan Carlos','barriosjc@yahoo.com.ar',NULL,'$2y$12$x6//3YpwoJzOYmKOudPituWTMCov.R7MZIX5yKW3NRwuj8B5FSqoC',NULL,NULL,NULL,'1',NULL,'2024-10-27 21:18:29');
+INSERT INTO `users` VALUES (1,'Juan Carlos','barriosjc@yahoo.com.ar',NULL,'$2y$12$x6//3YpwoJzOYmKOudPituWTMCov.R7MZIX5yKW3NRwuj8B5FSqoC',NULL,NULL,NULL,'1',NULL,'INS,REM','2024-10-27 21:18:29');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
