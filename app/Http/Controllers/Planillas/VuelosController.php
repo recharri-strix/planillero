@@ -142,4 +142,23 @@ class VuelosController extends Controller
         
         return $pdf->download('reporte_vuelos.pdf');
     }
+
+    public function finalizar(int $id)
+    {
+        
+        $vuelo = Vuelo::find($id);
+        $vuelo->estado_id = 2;
+        $vuelo->save();
+
+        return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo finalizado correctamente.');
+    }
+
+    public function anular(int $id)
+    {
+        $vuelo = Vuelo::find($id);  
+        $vuelo->estado_id = 3;  
+        $vuelo->save();
+
+        return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.'); 
+    }
 }

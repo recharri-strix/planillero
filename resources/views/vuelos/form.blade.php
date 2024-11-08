@@ -95,4 +95,6 @@
 <label for="aterrizaje_avion">Aterrizaje del Avión:</label>
 <input class="form-control" type="time" id="aterrizaje_avion" name="aterrizaje_avion" value="{{ old('aterrizaje_avion', $vuelo->hora_aterrizaje_avion) }}">
 
-<button class="form-control btn btn-primary mt-3" type="submit">Guardar</button>
+@if($vuelo->estado_id == null or $vuelo->estado_id == 1) 
+    <button class="form-control btn btn-primary mt-3" type="submit">Guardar</button>
+@endif

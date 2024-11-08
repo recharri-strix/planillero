@@ -26,10 +26,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/planillas/store/{id?}', [PlanillasController::class, 'store'])->name('planillas.store');
     Route::get('/planillas/{id}/vuelos', [PlanillasController::class, 'vuelos'])->name('planillas.vuelos');
     route::get('/planillas/filtrar', [PlanillasController::class, 'filtrar'])->name('planillas.filtrar');
+    Route::post('/planillas/finalizar/{id}', [PlanillasController::class, 'finalizar'])->name('planillas.finalizar');
 
     Route::get('/vuelos/nueva/{id}', [VuelosController::class, 'nueva'])->name('vuelos.nueva');
     Route::get('/vuelos/{id}/vuelos', [VuelosController::class, 'index'])->name('vuelos.index');
     Route::get('/vuelos/editar/{id}', [VuelosController::class, 'editar'])->name('vuelos.editar');
     Route::post('/vuelos/store/{id?}', [VuelosController::class, 'store'])->name('vuelos.store');
     Route::get('/vuelos/imprimir/{id}', [VuelosController::class, 'imprimir'])->name('vuelos.imprimir');
+    Route::post('/vuelos/finalizar/{id}', [VuelosController::class, 'finalizar'])->name('vuelos.finalizar');
+    Route::post('/vuelos/anular/{id}', [VuelosController::class, 'anular'])->name('vuelos.anular');
 });

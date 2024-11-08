@@ -41,7 +41,16 @@
                                 <tbody>
                                     @foreach ($vuelos as $item)
                                         <tr class="{{ !$item->aterrizaje ? 'verde-suave' : '' }}">
-                                            <td class="text-center">{{ $item->id }}</td>
+                                            <td class="text-center">
+                                                <h3><span
+                                                    class="{{ $item->estado_id == 2
+                                                        ? 'badge rounded-pill bg-success'
+                                                        : ($item->estado_id == 3
+                                                            ? 'badge rounded-pill bg-danger'
+                                                            : '') }}
+                                                        ">{{ $item->id }}</span>
+                                                </h3>
+                                            </td>
                                             <td class="d-none d-md-table-cell">{{ $item->tema_nombre }}</td>
                                             <!-- Oculto en móviles -->
                                             <td>{{ $item->piloto->name }}</td>
@@ -79,5 +88,4 @@
             </div>
         </div>
     </div>
-
 @endsection
