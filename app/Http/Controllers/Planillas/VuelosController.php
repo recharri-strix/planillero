@@ -34,7 +34,7 @@ class VuelosController extends Controller
     public function nueva(int $planilla_id)
     {
         $temas = Tema::get();
-        $pilotos = User::get();
+        $pilotos = User::orderby('name', 'asc')->get();        
         $aviones = Maquina::where("tipo", "avion")->get();
         $remolcadores = User::where('tipo', 'like', '%REM%')->get();
         $planeadores = Maquina::where("tipo", "planeador")->get();
