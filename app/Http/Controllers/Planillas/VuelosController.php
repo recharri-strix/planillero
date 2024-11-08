@@ -34,7 +34,7 @@ class VuelosController extends Controller
     public function nueva(int $planilla_id)
     {
         $temas = Tema::get();
-        $pilotos = User::orderby('name', 'asc')->get();        
+        $pilotos = User::orderby('name', 'asc')->get();
         $aviones = Maquina::where("tipo", "avion")->get();
         $remolcadores = User::where('tipo', 'like', '%REM%')->get();
         $planeadores = Maquina::where("tipo", "planeador")->get();
@@ -139,8 +139,7 @@ class VuelosController extends Controller
 
         $pdf = Pdf::loadView('reportes.vuelosRpt', ['vuelos' => $vuelos, 'planilla' => $planilla]);
         $pdf->setPaper('legal', 'landscape');
-        return $pdf->download('reporte_vuelos.pdf');
         
+        return $pdf->download('reporte_vuelos.pdf');
     }
-
 }
