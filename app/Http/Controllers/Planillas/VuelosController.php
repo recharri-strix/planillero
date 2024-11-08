@@ -97,7 +97,7 @@ class VuelosController extends Controller
             'tema_id' => 'nullable|exists:temas,id',
             'piloto_id' => 'required|exists:users,id',
             'avion_id' => 'required|exists:maquinas,id',
-            'remolcador_id' => 'required|exists:maquinas,id',
+            'remolcador_id' => 'required|exists:users,id',
             'planeador_id' => 'required|exists:maquinas,id',
             'instructor_id' => 'nullable|exists:users,id',
             'tipo_pago_id' => 'nullable|exists:formas_pagos,id',
