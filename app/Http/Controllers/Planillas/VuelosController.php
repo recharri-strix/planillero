@@ -22,8 +22,8 @@ class VuelosController extends Controller
     {
         // Obtener todos los vuelos con relaciones para mostrar datos completos
         $vuelos = Vuelo:: where('planilla_id', $planilla_id)
-                ->orderBy('created_at', 'desc')
-                ->with(['planilla', 'piloto', 'avion', 'remolcador', 'planeador', 'instructor', 'tema'])->paginate(30);
+            ->orderBy('created_at', 'desc')
+            ->with(['planilla', 'piloto', 'avion', 'remolcador', 'planeador', 'instructor', 'tema'])->paginate(30);
 
         return view('vuelos.index', compact('vuelos', "planilla_id"));
     }
@@ -90,21 +90,31 @@ class VuelosController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->has('anular')) {
+            if ($request->has('id')) {
+                $vuelo = Vuelo::find($request->id);
+                $vuelo->estado_id = 3;
+                $vuelo->save();
+        
+                return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.');
+            }
+        }
+
         // Validar los datos
-        $request->validate([
-            'id' => 'nullable',
-            'planilla_id' => 'required',
-            'tema_id' => 'nullable|exists:temas,id',
-            'piloto_id' => 'required|exists:users,id',
-            'avion_id' => 'required|exists:maquinas,id',
-            'remolcador_id' => 'required|exists:users,id',
-            'planeador_id' => 'required|exists:maquinas,id',
-            'instructor_id' => 'nullable|exists:users,id',
-            'tipo_pago_id' => 'nullable|exists:formas_pagos,id',
-            'decolaje' => ['nullable', new TimeFormat],
-            'corte' => ['nullable', new TimeFormat],
-            'aterrizaje' => ['nullable', new TimeFormat],
-            'aterrizaje_avion' => ['nullable', new TimeFormat],
+        $validated = $request->validate([
+        'id' => 'nullable',
+        'planilla_id' => 'required',
+        'tema_id' => 'nullable|exists:temas,id',
+        'piloto_id' => 'required|exists:users,id',
+        'avion_id' => 'required|exists:maquinas,id',
+        'remolcador_id' => 'required|exists:users,id',
+        'planeador_id' => 'required|exists:maquinas,id',
+        'instructor_id' => 'nullable|exists:users,id',
+        'tipo_pago_id' => 'nullable|exists:formas_pagos,id',
+        'decolaje' => ['nullable', new TimeFormat],
+        'corte' => ['nullable', new TimeFormat],
+        'aterrizaje' => ['nullable', new TimeFormat],
+        'aterrizaje_avion' => ['nullable', new TimeFormat],
         ]);
 
         $data = $request->all();
@@ -123,6 +133,22 @@ class VuelosController extends Controller
             $vuelo->update($data);
         } else {
             Vuelo::create($data);
+        }
+
+        // Redirigir al índice de vuelos con un mensaje de éxitoDD
+        if ($request->has('finalizar')) {
+            foreach ($validated as $key => $valor) {
+                if (!(($key == 'id' || $key == 'instructor_id'))) {
+                    if (empty($valor)) {
+                        return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('error', 'Error, No puede finalizar el vuelo, solo puede dejar sin cargar el Instructor.');
+                    }
+                }
+            }
+ 
+            $vuelo->estado_id = 3;
+            $vuelo->save();
+
+            return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.');
         }
 
         // Redirigir al índice de vuelos con un mensaje de éxito
@@ -145,7 +171,7 @@ class VuelosController extends Controller
 
     public function finalizar(int $id)
     {
-        
+
         $vuelo = Vuelo::find($id);
         $vuelo->estado_id = 2;
         $vuelo->save();
@@ -155,10 +181,10 @@ class VuelosController extends Controller
 
     public function anular(int $id)
     {
-        $vuelo = Vuelo::find($id);  
-        $vuelo->estado_id = 3;  
+        $vuelo = Vuelo::find($id);
+        $vuelo->estado_id = 3;
         $vuelo->save();
 
-        return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.'); 
+        return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.');
     }
 }

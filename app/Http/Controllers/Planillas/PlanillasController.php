@@ -68,6 +68,10 @@ class PlanillasController extends Controller
 
     public function store(Request $request)
     {
+        // if($request->has('anular')) {
+
+        // }
+
         // Validar datos
         $validatedData = $request->validate([
             'fecha' => 'required|date',
