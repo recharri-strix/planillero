@@ -112,8 +112,24 @@ class VuelosController extends Controller
         'instructor_id' => 'nullable|exists:users,id',
         'tipo_pago_id' => 'nullable|exists:formas_pagos,id',
         'decolaje' => ['nullable', new TimeFormat],
-        'corte' => ['nullable', new TimeFormat],
-        'aterrizaje' => ['nullable', new TimeFormat],
+        'corte' => [
+            'nullable',
+            new TimeFormat,
+            function ($attribute, $value, $fail) use ($request) {
+                if ((empty($request->decolaje) && !empty($value)) || $value < $request->decolaje) {
+                    $fail('La hora de Corte debe ser mayor que la hora de Decolaje.');
+                }
+            }
+        ],
+        'aterrizaje' => [
+            'nullable',
+            new TimeFormat,
+            function ($attribute, $value, $fail) use ($request) {
+                if ((empty($request->corte) && !empty($value)) || $value < $request->corte) {
+                    $fail('La hora de Aterrizaje debe ser mayor que la hora de Corte.');
+                }
+            }
+        ],
         'aterrizaje_avion' => ['nullable', new TimeFormat],
         ]);
 
@@ -144,8 +160,7 @@ class VuelosController extends Controller
                     }
                 }
             }
- 
-            $vuelo->estado_id = 3;
+            $vuelo->estado_id = 2;
             $vuelo->save();
 
             return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.');

@@ -42,6 +42,17 @@
                                 <tbody>
                                     @foreach ($planillas as $item)
                                         <tr>
+                                            @if ($item->estado_id = 2)
+                                            <td class="td-actions text-center">
+                                                <form action="{{ route('planillas.finalizar', $item->id) }}" method="post" class="p-0 m-0">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-success" 
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Finalizar planilla del día">
+                                                        <i class="fa-solid fa-lock"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            @endif
                                             <td class="text-center">{{ $item->id }}</td>
                                             <td>{{ $item->fecha_tb }}</td>
                                             <td class="d-none d-md-table-cell">{{ $item->jefeCampo->name }}</td> <!-- Oculto en móviles -->
@@ -50,7 +61,7 @@
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Editar planilla del día">
                                                     <i class="fa fa-fw fa-edit"></i>
                                                 </a>
-                                                <a class="btn btn-sm btn-success" href="{{ route('vuelos.index', $item->id) }}"
+                                                <a class="btn btn-sm btn-info" href="{{ route('vuelos.index', $item->id) }}"
                                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Ver planilla de vuelos">
                                                     <i class="fa-solid fa-plane"></i>
                                                 </a>

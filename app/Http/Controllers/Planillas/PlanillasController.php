@@ -140,5 +140,12 @@ class PlanillasController extends Controller
         return view('planillas.index', compact('planillas', 'jefeCampos', 'jefe_campo_id', 'fecha'));
     }
     
+    public function finalizar(int $id)
+    {
+        $planilla = planilla::find($id);
+        $planilla->estado_id = 2;
+        $planilla->save();
 
+        return redirect()->route('planillas.index', $planilla->planilla_id)->with('success', 'planilla Finalizado correctamente.');
+    }
 }
