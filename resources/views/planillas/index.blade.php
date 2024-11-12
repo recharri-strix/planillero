@@ -42,18 +42,14 @@
                                 <tbody>
                                     @foreach ($planillas as $item)
                                         <tr>
-                                            @if ($item->estado_id = 2)
-                                            <td class="td-actions text-center">
-                                                <form action="{{ route('planillas.finalizar', $item->id) }}" method="post" class="p-0 m-0">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-sm btn-success" 
-                                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Finalizar planilla del día">
-                                                        <i class="fa-solid fa-lock"></i>
-                                                    </button>
-                                                </form>
+                                            <td class="text-center">
+                                                <h3><span
+                                                    class="{{ $item->estado_id == 2
+                                                                ? 'badge rounded-pill bg-success'
+                                                                : '' }}
+                                                        ">{{ $item->id }}</span>
+                                                </h3>
                                             </td>
-                                            @endif
-                                            <td class="text-center">{{ $item->id }}</td>
                                             <td>{{ $item->fecha_tb }}</td>
                                             <td class="d-none d-md-table-cell">{{ $item->jefeCampo->name }}</td> <!-- Oculto en móviles -->
                                             <td class="td-actions text-center">

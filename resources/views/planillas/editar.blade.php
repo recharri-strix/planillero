@@ -14,6 +14,17 @@
                 <input type="hidden" name="id" value="{{ $planilla->id }}">
                 @include('planillas.form')
             </form>
+            @if ($planilla->estado_id <> 2 && $puedeFinalizar)
+                <td class="td-actions text-center">
+                    <form action="{{ route('planillas.finalizar', $planilla->id) }}" method="post" class="p-0 m-0">
+                        @csrf
+                        <button type="submit" class="btn btn-success btn-sm w-100"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Finalizar planilla del día.">
+                            {{-- <i class="fa-solid fa-lock"></i> --}} Finalizar planilla
+                        </button>
+                    </form>
+                </td>
+            @endif
         </div>
     </div>
 </div>

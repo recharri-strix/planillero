@@ -76,5 +76,3 @@
     @if ($planilla->estado_id <> 2) 
         <button class="form-control btn btn-primary mt-3" type="submit">Guardar</button>
     @endif
-
-    voy a tener que chequear que para cerrar la planilla todos los vuelos esten co finalizados o anulados

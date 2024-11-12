@@ -62,8 +62,15 @@ class PlanillasController extends Controller
         $temperaturas = Temperatura::orderby('nombre', 'asc')->get();
         $nubes = Nube::orderby('nombre', 'asc')->get();
         $plafons = Plafon::orderby('nombre', 'asc')->get();
-        
-        return view('planillas.editar', compact('planilla', 'jefeCampos', 'direccionesViento', 'velocidadesViento', 'temperaturas', 'nubes', 'plafons'));
+        $puedeFinalizar = vuelo::where(function ($query) {
+            $query->where('estado_id', 1)
+                  ->orWhereNull('estado_id');
+        })
+        ->where('planilla_id', $id)
+        ->count() == 0;
+
+        return view('planillas.editar', compact('planilla', 'jefeCampos', 'direccionesViento', 'velocidadesViento', 
+                        'temperaturas', 'nubes', 'plafons', 'puedeFinalizar'));
     }
 
     public function store(Request $request)
