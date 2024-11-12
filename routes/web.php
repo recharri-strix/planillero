@@ -1,3 +1,4 @@
+php artisan make:middleware VerificarEstadoPlanilla
 <?php
 
 use Illuminate\Support\Facades\Auth;

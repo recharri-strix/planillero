@@ -21,11 +21,12 @@ class VuelosController extends Controller
     public function index(int $planilla_id)
     {
         // Obtener todos los vuelos con relaciones para mostrar datos completos
+        $planilla = Planilla::find($planilla_id);
         $vuelos = Vuelo:: where('planilla_id', $planilla_id)
             ->orderBy('created_at', 'desc')
             ->with(['planilla', 'piloto', 'avion', 'remolcador', 'planeador', 'instructor', 'tema'])->paginate(30);
 
-        return view('vuelos.index', compact('vuelos', "planilla_id"));
+        return view('vuelos.index', compact('vuelos', "planilla"));
     }
 
     /**

@@ -10,12 +10,14 @@
                             <span id="card_title">
                                 {{ __('Planillas de vuelos') }}
                             </span>
+                            @if ($planilla->estado_id == 1) 
+                                <div class="form-group col-md-4 d-flex push-right">
+                                    <a href="{{ route('vuelos.nueva', $planilla->id) }}" class="btn btn-info btn-sm">Nuevo
+                                        vuelo</a>
+                                </div>
+                            @endif
                             <div class="form-group col-md-4 d-flex push-right">
-                                <a href="{{ route('vuelos.nueva', $planilla_id) }}" class="btn btn-info btn-sm">Nuevo
-                                    vuelo</a>
-                            </div>
-                            <div class="form-group col-md-4 d-flex push-right">
-                                <a href="{{ route('vuelos.imprimir', $planilla_id) }}"
+                                <a href="{{ route('vuelos.imprimir', $planilla->id) }}"
                                     class="btn btn-warning btn-sm">Imprimir planilla</a>
                             </div>
                             <a href="{{ route('planillas.index') }}" class="btn btn-primary btn-sm float-right">Volver</a>
