@@ -149,6 +149,16 @@ class PlanillasController extends Controller
     
     public function finalizar(int $id)
     {
+        $puedeFinalizar = vuelo::where(function ($query) {
+            $query->where('estado_id', 1)
+                ->orWhereNull('estado_id');
+        })
+        ->where('planilla_id', $id)
+        ->count() == 0;
+        if (!$puedeFinalizar) {
+            return back()->with('error', 'No se puede finalizar la planilla, porque existen vuelos sin finalizar.');
+        }
+        
         $planilla = planilla::find($id);
         $planilla->estado_id = 2;
         $planilla->save();
