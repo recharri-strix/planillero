@@ -16,7 +16,7 @@ class Vuelo extends Model
         'planilla_id', 'tema_id', 'piloto_id', 'avion_id', 
         'remolcador_id', 'planeador_id', 'instructor_id', 
         'tipo_pago_id', 'decolaje', 'corte', 'aterrizaje', 
-        'aterrizaje_avion'
+        'aterrizaje_avion', 'estado_id', 'pago', 'bau'
     ];
 
     public function getHoraCorteAttribute()

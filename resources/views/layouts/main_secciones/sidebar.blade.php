@@ -2,24 +2,22 @@
     <div class="sidenav-menu">
         <div class="nav accordion" id="accordionSidenav">
             {{-- @role('super-admin') --}}
-                <div class="sidenav-menu-heading">SUPER ADMIN</div>
+                <div class="sidenav-menu-heading">JEFE DE CAMPO</div>
                 <a class="nav-link" href="{{ route('planillas.index') }}">
                     <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
                     Planillero
                 </a>
-             {{-- @endrole --}}
-                {{-- <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
-                    data-bs-target="#collapseUsuarios" aria-expanded="false" aria-controls="collapseUsuarios">
-                    <div class="nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
-                    Usuarios
-                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                <a class="nav-link" href="{{ route('planillas.index') }}">
+                    <div class="nav-link-icon"><i data-feather="printer"></i></div>
+                    Informes
                 </a>
-                <div class="collapse" id="collapseUsuarios" data-bs-parent="#DasboardSidenav">
-                    <nav class="sidenav-menu-nested nav accordion" id="UsuariosSidenavPages">
-                            <a class="nav-link" href="{{ route('usuario.index') }}">ABM Usuarios</a>
-                    </nav>
-                </div> --}}
 
+                @role('super-admin')
+                    <div class="sidenav-menu-heading">SEGURIDAD</div>
+                    <a class="nav-link" href="{{ route('usuario.index') }}">ABM Usuarios</a>
+                    <a class="nav-link" href="{{ route('permisos.index') }}">Permisos</a>
+                    <a class="nav-link" href="{{ route('roles.index') }}">Perfiles</a>
+                @endrole
         </div>
     </div>
 

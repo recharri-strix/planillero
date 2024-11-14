@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Rules\TimeFormat;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Requests\VueloRequest;
 
 class VuelosController extends Controller
 {
@@ -89,88 +90,45 @@ class VuelosController extends Controller
     /**
      * Almacena un nuevo vuelo en la base de datos.
      */
+
     public function store(Request $request)
     {
-        if ($request->has('anular')) {
-            if ($request->has('id')) {
-                $vuelo = Vuelo::find($request->id);
-                $vuelo->estado_id = 3;
-                $vuelo->save();
-        
-                return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.');
-            }
-        }
-
-        // Validar los datos
-        $validated = $request->validate([
-        'id' => 'nullable',
-        'planilla_id' => 'required',
-        'tema_id' => 'nullable|exists:temas,id',
-        'piloto_id' => 'required|exists:users,id',
-        'avion_id' => 'required|exists:maquinas,id',
-        'remolcador_id' => 'required|exists:users,id',
-        'planeador_id' => 'required|exists:maquinas,id',
-        'instructor_id' => 'nullable|exists:users,id',
-        'tipo_pago_id' => 'nullable|exists:formas_pagos,id',
-        'decolaje' => ['nullable', new TimeFormat],
-        'corte' => [
-            'nullable',
-            new TimeFormat,
-            function ($attribute, $value, $fail) use ($request) {
-                if ((empty($request->decolaje) && !empty($value)) || $value < $request->decolaje) {
-                    $fail('La hora de Corte debe ser mayor que la hora de Decolaje.');
-                }
-            }
-        ],
-        'aterrizaje' => [
-            'nullable',
-            new TimeFormat,
-            function ($attribute, $value, $fail) use ($request) {
-                if ((empty($request->corte) && !empty($value)) || $value < $request->corte) {
-                    $fail('La hora de Aterrizaje debe ser mayor que la hora de Corte.');
-                }
-            }
-        ],
-        'aterrizaje_avion' => ['nullable', new TimeFormat],
-        ]);
-
-        $data = $request->all();
-        // dd($data);
-        $fields = ['decolaje', 'corte', 'aterrizaje', 'aterrizaje_avion'];
-        foreach ($fields as $field) {
-            if (!empty($data[$field])) {
-                $data[$field] = now()->format('Y-m-d') . ' ' . $data[$field] . ':00';
-            } else {
-                $data[$field] = null;
-            }
-        }
-
-        if ($request->has("id")) {
+        // Anulación del vuelo
+        if ($request->has('anular') && $request->has('id')) {
             $vuelo = Vuelo::find($request->id);
-            $vuelo->update($data);
-        } else {
-            Vuelo::create($data);
+            $vuelo->estado_id = 3;
+            $vuelo->save();
+    
+            return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.');
         }
-
-        // Redirigir al índice de vuelos con un mensaje de éxitoDD
+    
+        // Validación y sanitización de datos
+        $validated = VueloRequest::validate($request);
+        $data = VueloRequest::formatFields($validated);
+    
+        // Actualización o creación del vuelo
+        $vuelo = $request->has("id") ? Vuelo::find($request->id) : new Vuelo;
+        $vuelo->fill($data);
+        $vuelo->save();
+    
+        // Lógica para finalizar el vuelo
         if ($request->has('finalizar')) {
             foreach ($validated as $key => $valor) {
-                if (!(($key == 'id' || $key == 'instructor_id'))) {
-                    if (empty($valor)) {
-                        return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('error', 'Error, No puede finalizar el vuelo, solo puede dejar sin cargar el Instructor.');
-                    }
+                if ( !in_array($key, ['bau','pago','id','instructor_id']) && empty($valor) ) {
+                    return redirect()->route('vuelos.index', $vuelo->planilla_id)
+                                     ->with('error', 'Error, No puede finalizar el vuelo, solo puede dejar sin cargar el Instructor.');
                 }
             }
             $vuelo->estado_id = 2;
             $vuelo->save();
-
-            return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo anulado correctamente.');
+    
+            return redirect()->route('vuelos.index', $vuelo->planilla_id)->with('success', 'Vuelo finalizado correctamente.');
         }
-
+    
         // Redirigir al índice de vuelos con un mensaje de éxito
         return redirect()->route('vuelos.index', $request->planilla_id)->with('success', 'Vuelo creado correctamente.');
     }
-
+    
     public function imprimir(int $id)
     {
 

@@ -27,7 +27,7 @@ CREATE TABLE `cache` (
   `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,6 @@ CREATE TABLE `cache` (
 
 LOCK TABLES `cache` WRITE;
 /*!40000 ALTER TABLE `cache` DISABLE KEYS */;
-INSERT INTO `cache` VALUES ('admin@example.com|127.0.0.1:timer','i:1730053162;',1730053162),('admin@example.com|127.0.0.1','i:1;',1730053162);
 /*!40000 ALTER TABLE `cache` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +51,7 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +80,7 @@ CREATE TABLE `failed_jobs` (
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +106,7 @@ CREATE TABLE `formas_pagos` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +138,7 @@ CREATE TABLE `job_batches` (
   `created_at` int NOT NULL,
   `finished_at` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +167,7 @@ CREATE TABLE `jobs` (
   `created_at` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `jobs_queue_index` (`queue`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +197,7 @@ CREATE TABLE `maquinas` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,7 +222,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,6 +233,61 @@ LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `model_has_permissions`
+--
+
+DROP TABLE IF EXISTS `model_has_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint unsigned NOT NULL,
+  `model_type` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `fk_model_has_permissions_permissions1` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`),
+  CONSTRAINT `fk_model_has_permissions_users1` FOREIGN KEY (`model_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `model_has_permissions`
+--
+
+LOCK TABLES `model_has_permissions` WRITE;
+/*!40000 ALTER TABLE `model_has_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `model_has_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `model_has_roles`
+--
+
+DROP TABLE IF EXISTS `model_has_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint unsigned NOT NULL,
+  `model_type` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `fk_model_has_roles_roles1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
+  CONSTRAINT `fk_model_has_roles_users1` FOREIGN KEY (`model_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `model_has_roles`
+--
+
+LOCK TABLES `model_has_roles` WRITE;
+/*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
+INSERT INTO `model_has_roles` VALUES (4,'App\\Models\\User',1);
+/*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -250,7 +304,7 @@ CREATE TABLE `nubes` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +329,7 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,6 +339,33 @@ CREATE TABLE `password_reset_tokens` (
 LOCK TABLES `password_reset_tokens` WRITE;
 /*!40000 ALTER TABLE `password_reset_tokens` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_reset_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `permissions`
+--
+
+DROP TABLE IF EXISTS `permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `permissions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permissions`
+--
+
+LOCK TABLES `permissions` WRITE;
+/*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -304,7 +385,7 @@ CREATE TABLE `pilotos` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +411,7 @@ CREATE TABLE `plafon` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,20 +433,20 @@ DROP TABLE IF EXISTS `planillas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `planillas` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `fecha` datetime not null,
-  `jefe_campo_id` int not null,
+  `fecha` datetime DEFAULT NULL,
+  `jefe_campo_id` int DEFAULT NULL,
   `dir_viento_id` int DEFAULT NULL,
   `vel_viento_id` int DEFAULT NULL,
   `temperatura_id` int DEFAULT NULL,
   `nube_id` int DEFAULT NULL,
   `plafon_id` int DEFAULT NULL,
   `novedades` varchar(1000) DEFAULT NULL,
-  `estado_id` int DEFAULT 1,
+  `estado_id` int DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,8 +455,8 @@ CREATE TABLE `planillas` (
 
 LOCK TABLES `planillas` WRITE;
 /*!40000 ALTER TABLE `planillas` DISABLE KEYS */;
-/* INSERT INTO `planillas` VALUES (1,'2024-10-28 18:13:00',1,25,26,27,5,35,'nada','2024-10-29 00:24:58','2024-10-29 00:24:58',NULL),(2,'2024-10-29 18:36:00',1,18,24,24,5,29,'nada 2','2024-10-29 00:36:36','2024-10-29 00:36:36',NULL);
- *//*!40000 ALTER TABLE `planillas` ENABLE KEYS */;
+INSERT INTO `planillas` VALUES (1,'2024-10-28 18:13:00',1,25,26,27,5,35,'nada',2,'2024-10-29 00:24:58','2024-11-12 00:45:24',NULL),(2,'2024-10-29 18:36:00',1,18,24,24,5,29,'nada 2',1,'2024-10-29 00:36:36','2024-10-29 00:36:36',NULL),(3,'2024-11-06 00:00:00',1,NULL,NULL,NULL,NULL,NULL,'',2,'2024-11-06 17:01:42','2024-11-12 19:30:29',NULL);
+/*!40000 ALTER TABLE `planillas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -390,7 +471,7 @@ CREATE TABLE `presion` (
   `valor` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -416,7 +497,7 @@ CREATE TABLE `presiones` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -427,6 +508,58 @@ LOCK TABLES `presiones` WRITE;
 /*!40000 ALTER TABLE `presiones` DISABLE KEYS */;
 INSERT INTO `presiones` VALUES (1,'990','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(2,'991','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(3,'992','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(4,'993','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(5,'994','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(6,'995','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(7,'996','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(8,'997','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(9,'998','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(10,'999','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(11,'1000','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(12,'1001','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(13,'1002','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(14,'1003','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(15,'1004','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(16,'1005','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(17,'1006','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(18,'1007','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(19,'1008','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(20,'1009','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(21,'1010','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(22,'1011','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(23,'1012','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(24,'1013','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(25,'1014','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(26,'1015','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(27,'1016','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(28,'1017','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(29,'1018','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(30,'1019','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(31,'1020','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(32,'1021','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(33,'1022','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(34,'1023','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(35,'1024','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(36,'1025','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(37,'1026','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(38,'1027','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(39,'1028','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(40,'1029','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(41,'1030','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(42,'1031','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(43,'1032','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(44,'1033','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(45,'1034','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(46,'1035','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(47,'1036','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(48,'1037','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(49,'1038','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(50,'1039','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(51,'1040','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(52,'1041','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(53,'1042','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(54,'1043','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(55,'1044','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(56,'1045','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(57,'1046','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(58,'1047','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(59,'1048','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(60,'1049','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(61,'1050','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(62,'1051','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(63,'1052','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(64,'1053','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(65,'1054','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(66,'1055','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(67,'1056','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(68,'1057','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(69,'1058','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(70,'1059','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(71,'1060','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(72,'1061','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL),(73,'1062','2024-10-28 20:48:30','2024-10-28 20:48:30',NULL);
 /*!40000 ALTER TABLE `presiones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `role_has_permissions`
+--
+
+DROP TABLE IF EXISTS `role_has_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint unsigned NOT NULL,
+  `role_id` bigint unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`role_id`),
+  KEY `fk_role_has_permissions_roles1` (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role_has_permissions`
+--
+
+LOCK TABLES `role_has_permissions` WRITE;
+/*!40000 ALTER TABLE `role_has_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `role_has_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `roles` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (4,'super-admin','web',NULL,NULL),(5,'usuario','web',NULL,NULL);
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -446,7 +579,7 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`user_id`),
   KEY `sessions_last_activity_index` (`last_activity`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -455,7 +588,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('sgyzSoP5lI0ytJabunvRZpuXbxloAScRZ5C2CxsO',1,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVk4yZWNUZEh6WmZ1V0xsTU1UUHFIYkkxRFQxeGp0eGpQbUIzV2F2UyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC92dWVsb3MvMi92dWVsb3MiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjQ6ImF1dGgiO2E6MTp7czoyMToicGFzc3dvcmRfY29uZmlybWVkX2F0IjtpOjE3MzAyMTA3Nzc7fX0=',1730227869);
+INSERT INTO `sessions` VALUES ('Fc86sxh1NdUK5I4w7HgtFeQiH2iarBE1RxkIxYQo',1,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36','YTo2OntzOjY6Il90b2tlbiI7czo0MDoiZlFtMTh4REJORUVYTWhaeWtrbnlDYUp3cE1LaW1pM0g1YUpZcFp6dCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vbG9jYWxob3N0OjgwMDAvdnVlbG9zLzMvdnVlbG9zIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjQ6ImF1dGgiO2E6MTp7czoyMToicGFzc3dvcmRfY29uZmlybWVkX2F0IjtpOjE3MzE1OTkxMzg7fX0=',1731609379);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,7 +607,7 @@ CREATE TABLE `temas` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -501,7 +634,7 @@ CREATE TABLE `temperaturas` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -531,12 +664,13 @@ CREATE TABLE `users` (
   `telefono` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dni` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cambio_password` varchar(1) COLLATE utf8mb4_unicode_ci DEFAULT '1',
-  tipo varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tipo` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT 'null',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -545,7 +679,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Juan Carlos','barriosjc@yahoo.com.ar',NULL,'$2y$12$x6//3YpwoJzOYmKOudPituWTMCov.R7MZIX5yKW3NRwuj8B5FSqoC',NULL,NULL,NULL,'1',NULL,'INS,REM','2024-10-27 21:18:29');
+INSERT INTO `users` VALUES (1,'Juan Carlos','barriosjc@yahoo.com.ar',NULL,'$2y$12$x6//3YpwoJzOYmKOudPituWTMCov.R7MZIX5yKW3NRwuj8B5FSqoC',NULL,NULL,NULL,'1','INS,REM',NULL,'2024-10-27 21:18:29',NULL),(2,'Rolando','rolo@yahoo.com.ar',NULL,'$2y$12$x6//3YpwoJzOYmKOudPituWTMCov.R7MZIX5yKW3NRwuj8B5FSqoC',NULL,NULL,NULL,'1','REM',NULL,'2024-10-27 21:18:29',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -563,7 +697,7 @@ CREATE TABLE `viento_dir` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -590,7 +724,7 @@ CREATE TABLE `viento_vel` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -613,23 +747,25 @@ DROP TABLE IF EXISTS `vuelos`;
 CREATE TABLE `vuelos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `planilla_id` int NOT NULL,
-  `tema_id` int NULL,
-  `piloto_id` int NOT NULL,
-  `avion_id` int NULL,
-  `remolcador_id` int NULL,
-  `planeador_id` int NULL,
-  `instructor_id` int NULL,
-  `tipo_pago_id` int NULL,
+  `tema_id` int DEFAULT NULL,
+  `piloto_id` int DEFAULT NULL,
+  `avion_id` int DEFAULT NULL,
+  `remolcador_id` int DEFAULT NULL,
+  `planeador_id` int DEFAULT NULL,
+  `instructor_id` int DEFAULT NULL,
+  `tipo_pago_id` int DEFAULT NULL,
   `decolaje` datetime DEFAULT NULL,
   `corte` datetime DEFAULT NULL,
   `aterrizaje` datetime DEFAULT NULL,
   `aterrizaje_avion` datetime DEFAULT NULL,
-  `estado_id` int DEFAULT 1,
+  `estado_id` int DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
+  `bau` varchar(100) DEFAULT NULL,
+  `pago` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -638,8 +774,8 @@ CREATE TABLE `vuelos` (
 
 LOCK TABLES `vuelos` WRITE;
 /*!40000 ALTER TABLE `vuelos` DISABLE KEYS */;
-/* INSERT INTO `vuelos` VALUES (1,2,1,1,14,1,1,1,1,'2024-10-29 11:14:00','2024-10-29 11:20:00','2024-10-29 12:14:00','2024-10-29 11:24:00','2024-10-29 18:17:02','2024-10-29 15:39:33',NULL),(2,2,1,1,15,1,2,1,1,'2024-10-29 14:14:00','2024-10-29 14:18:00','2024-10-29 14:24:00','2024-10-29 14:20:00','2024-10-29 18:17:58','2024-10-29 15:39:33',NULL),(3,2,1,1,14,1,3,1,4,'2024-10-29 13:38:00','2024-10-29 13:44:00',NULL,NULL,'2024-10-29 19:45:13','2024-10-29 19:45:13',NULL);
- *//*!40000 ALTER TABLE `vuelos` ENABLE KEYS */;
+INSERT INTO `vuelos` VALUES (1,2,1,1,14,1,1,1,1,'2024-10-29 11:14:00','2024-10-29 11:20:00','2024-10-29 12:14:00','2024-10-29 11:24:00',NULL,'2024-10-29 18:17:02','2024-10-29 15:39:33',NULL,NULL,NULL),(2,2,1,1,15,1,2,1,1,'2024-10-29 14:14:00','2024-10-29 14:18:00','2024-10-29 14:24:00','2024-10-29 14:20:00',NULL,'2024-10-29 18:17:58','2024-10-29 15:39:33',NULL,NULL,NULL),(3,2,1,1,14,1,3,1,4,'2024-11-10 13:38:00','2024-11-10 13:44:00',NULL,NULL,NULL,'2024-10-29 19:45:13','2024-11-10 19:29:33',NULL,NULL,NULL),(4,2,3,1,14,1,6,1,1,'2024-11-02 20:14:00','2024-11-02 20:22:00','2024-11-02 21:58:00','2024-11-02 23:59:00',NULL,'2024-11-03 02:09:33','2024-11-03 02:09:33',NULL,NULL,NULL),(5,2,1,1,14,1,1,1,1,'2024-11-02 10:55:00','2024-11-02 00:00:00','2024-11-02 00:00:00','2024-11-02 00:00:00',NULL,'2024-11-03 02:10:20','2024-11-03 02:10:20',NULL,NULL,NULL),(6,2,1,1,14,1,7,1,1,'2024-11-04 10:25:00','2024-11-04 10:45:00','2024-11-04 11:00:00','2024-11-04 11:30:00',NULL,'2024-11-03 02:18:02','2024-11-05 01:51:51',NULL,NULL,NULL),(7,2,1,1,14,1,8,NULL,1,'2024-11-10 11:00:00','2024-11-10 11:11:00','2024-11-10 12:11:00','2024-11-10 13:11:00',2,'2024-11-05 21:50:44','2024-11-10 19:29:07',NULL,NULL,NULL),(8,2,1,1,14,1,5,NULL,1,'2024-11-10 08:08:00','2024-11-10 12:00:00','2024-11-10 13:00:00','2024-11-10 13:30:00',3,'2024-11-06 18:30:11','2024-11-10 19:27:42',NULL,NULL,NULL),(9,3,4,1,14,1,11,NULL,NULL,NULL,NULL,NULL,NULL,3,'2024-11-06 18:31:05','2024-11-08 21:11:16',NULL,NULL,NULL),(10,3,NULL,1,14,1,12,NULL,NULL,NULL,NULL,NULL,NULL,2,'2024-11-06 18:53:41','2024-11-08 20:48:24',NULL,NULL,NULL),(11,2,1,1,14,1,11,NULL,1,'2024-11-10 11:20:00','2024-11-10 12:20:00','2024-11-10 15:20:00','2024-11-10 15:23:00',3,'2024-11-07 22:56:38','2024-11-10 19:26:34',NULL,NULL,NULL),(12,3,6,1,14,1,2,NULL,2,'2024-11-12 11:11:00','2024-11-12 11:11:00','2024-11-12 11:11:00','2024-11-12 11:11:00',2,'2024-11-08 21:28:12','2024-11-12 19:30:15',NULL,NULL,NULL),(13,1,1,1,14,1,10,NULL,1,'2024-11-11 08:00:00','2024-11-11 08:11:00','2024-11-11 09:00:00','2024-11-11 12:00:00',2,'2024-11-11 21:54:49','2024-11-11 21:54:58',NULL,NULL,NULL),(14,2,2,1,14,1,12,1,3,'2024-11-14 08:00:00','2024-11-14 11:00:00','2024-11-14 12:00:00','2024-11-14 12:58:00',1,'2024-11-14 20:24:24','2024-11-14 20:30:28',NULL,NULL,'mada pago'),(15,2,NULL,1,14,1,12,NULL,NULL,NULL,NULL,NULL,NULL,1,'2024-11-14 21:00:39','2024-11-14 21:00:39',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `vuelos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -651,4 +787,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-29 15:56:58
+-- Dump completed on 2024-11-14 15:37:24
