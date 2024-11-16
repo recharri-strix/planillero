@@ -131,7 +131,6 @@ class VuelosController extends Controller
     
     public function imprimir(int $id)
     {
-
         $vuelos = Vuelo::with(['tema', 'piloto', 'avion', 'remolcador', 'planeador', 'instructor', 'tipoPago'])
         ->where('planilla_id', $id)
         ->get();

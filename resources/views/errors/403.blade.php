@@ -22,7 +22,7 @@
                                 <div class="text-center mt-4">
                                     <img class="img-fluid p-4" src="assets/img/illustrations/403-error-forbidden.svg" alt="" />
                                     <p class="lead">No esta permitido acceder a este recurso en el estado actual.</p>
-                                    <a class="text-arrow-icon" href="{{route('planillero.index')}}">
+                                    <a class="text-arrow-icon" href="{{route('planillas.index')}}">
                                         <i class="ms-0 me-1" data-feather="arrow-left"></i>
                                         Veulve al planillero
                                     </a>

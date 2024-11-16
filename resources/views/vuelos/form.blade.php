@@ -76,7 +76,7 @@
 <div class="form-group">
     <label for="bau">BAU</label>
     <input type="text" class="form-control" id="bau" name="bau" placeholder="Ingrese el BAU"
-        data-toggle="tooltip" data-placement="right" title="Ingrese el valor del BAU">
+        data-toggle="tooltip" data-placement="right" title="Ingrese el valor del BAU" value="{{ old('bau', $vuelo->bau) }}">
 </div>
 
 <!-- Select para Tipo de Pago -->
@@ -94,7 +94,7 @@
 <div class="form-group">
     <label for="pago">Pago</label>
     <input type="text" class="form-control" id="pago" name="pago" placeholder="Ingrese el pago"
-        data-toggle="tooltip" data-placement="right" title="Ingrese el valor del pago">
+        data-toggle="tooltip" data-placement="right" title="Ingrese el valor del pago" value="{{ old('pago', $vuelo->pago) }}">
 </div>
 
 <!-- Campo de Decolaje -->

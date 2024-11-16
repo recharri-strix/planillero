@@ -52,7 +52,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Usuario</th>
-                                            <th>Avatar</th>
+                                            <th>Dni</th>
                                             <th>Mail</th>
                                             <th class="float-right" style="width:25%">
                                                 Valores
@@ -64,9 +64,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->name }}</td>
-                                                <td><img src="{{ Storage::disk('usuarios')->url($item->foto) }}"
-                                                        class="rounded-circle" width="45px" alt=""> </td>
-
+                                                <td>{{ $item->dni }}</td>
                                                 <td>{{ $item->email }}</td>
                                                 @if ($esabm)
                                                     <td>

@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\seguridad\RoleController;
 use App\Http\Controllers\Planillas\VuelosController;
 use App\Http\Controllers\seguridad\ProfileController;
 use App\Http\Controllers\seguridad\UsuarioController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\seguridad\PermisosController;
 use App\Http\Controllers\Planillas\PlanillasController;
 
@@ -13,10 +15,17 @@ use App\Http\Controllers\Planillas\PlanillasController;
 //     return view('welcome');
 // });
 
-Auth::routes();
+// Auth::routes();
+Route::match(['get'], 'login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('login/restablecer', [ResetPasswordController::class, 'restablecer'])->name('login.restablecer');
+Route::post('login/email', [ResetPasswordController::class, 'email'])->name('login.email');
 
 Route::middleware('auth')->group(function () {
-// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('password/profile', [ProfileController::class, 'password'])->name('profile.password');
+    Route::post('pasword/profile', [ProfileController::class, 'savePassword'])->name('profile.password.save');
+
     Route::get('/', [App\Http\Controllers\HomeController::class, 'main'])->name('main');
 
     Route::resources([
@@ -46,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/vuelos/finalizar/{id}', [VuelosController::class, 'finalizar'])->name('vuelos.finalizar');
     Route::post('/vuelos/anular/{id}', [VuelosController::class, 'anular'])->name('vuelos.anular');
 
-    // Route::group(['middleware' => ['permission:adm_permisos']], function () {
+    Route::middleware(['role:super-admin'])->group(function () {
         Route::resources([
             'usuario' => UsuarioController::class,
             'roles' => RoleController::class,
@@ -66,5 +75,5 @@ Route::middleware('auth')->group(function () {
         Route::get('permisos/{id}/usuarios', [permisosController::class, 'usuarios'])->name('permisos.usuarios');
         Route::get('permisos/{id}/roles/{rolid}/{tarea}', [permisosController::class, 'roles']);
         Route::get('permisos/{id}/roles', [permisosController::class, 'roles'])->name('permisos.grupos');
-    // });
+    });
 });

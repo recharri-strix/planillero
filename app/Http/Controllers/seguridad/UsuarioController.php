@@ -4,7 +4,6 @@ namespace App\Http\Controllers\seguridad;
 
 use App\Models\Role;
 use App\Models\user;
-use App\Models\Centro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -33,7 +32,6 @@ class UsuarioController extends Controller
         }
 
         $esabm = true;
-
         return view('seguridad.usuario.index', compact('user', 'esabm'))
                     ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -46,11 +44,10 @@ class UsuarioController extends Controller
     public function create()
     {
         $user = new user();
-        $centros = Centro::orderby("nombre")->get();
         $perfiles = role::get();
         $perfiles_user = '';
 
-        return view('seguridad.usuario.create')->with(compact('user', 'centros', 'perfiles', 'perfiles_user'));
+        return view('seguridad.usuario.create')->with(compact('user', 'perfiles', 'perfiles_user'));
     }
 
     /**
@@ -65,11 +62,14 @@ class UsuarioController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:50',
             'email' => 'required|string|email|max:255|unique:users,email,' . $request->id,
-            'centro_id' => 'required'
+            'dni' => 'nullable|string|max:10',
+            'telefono' => 'nullable|string|max:50',
+            'tipo' => 'nullable|string|max:50'
         ]);
 
         // $validated['activo'] = isset($validated['activo']) ? 1 : 0;
         $validated['password'] = Hash::make('12345678');
+        $validated['tipo'] = strtoupper($validated['tipo']);    
         $validated['cambio_password'] = 1;
         $validated['foto'] = 'fotovacia.jpeg';
 
@@ -101,8 +101,7 @@ class UsuarioController extends Controller
         //         ->setBody($correo->render(), 'text/html');
         // });
 
-        return back()
-            ->withInput($request->input())
+        return redirect()->route('usuario.index')
             ->with('success', 'Se guardó los datos del usuario de forma correcta.');
     }
 
@@ -131,7 +130,6 @@ class UsuarioController extends Controller
     {
         $user = User::findOrFail($id);
         $perfiles = role::v_roles()->get();
-        $centros = Centro::orderby("nombre")->get();
 
         // $perfiles_user = $user->roles;
         $perfiles_user = '';
@@ -139,7 +137,7 @@ class UsuarioController extends Controller
             $perfiles_user .= $value->id . ",";
         }
 
-        return view('seguridad.usuario.edit')->with(compact('user', 'perfiles', 'perfiles_user', 'centros'));
+        return view('seguridad.usuario.edit')->with(compact('user', 'perfiles', 'perfiles_user'));
     }
 
     /**
@@ -154,14 +152,16 @@ class UsuarioController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:50',
-            'centro_id' => 'required',
             'email' => 'required|string|email|max:255|unique:users,email,' . $request->id,
+            'dni' => 'nullable|string|max:10',
+            'telefono' => 'nullable|string|max:50', 
+            'tipo' => 'nullable|string|max:50'
         ]);
-
         if ($request->has('blanquear')) {
             $validated['password'] = Hash::make('12345678');
             $validated['cambio_password'] = 1;
         }
+        $validated['tipo'] = strtoupper($validated['tipo']); 
         $request->validate([
             'perfil_id' => 'required'
         ]);

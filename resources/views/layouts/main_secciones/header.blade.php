@@ -32,18 +32,21 @@
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage"
                 href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false"><img class="img-fluid"
-                    src="{{ asset('assets/img/usuario.png') }}" /></a>
+                aria-expanded="false"><img class="img-fluid" src="{{ asset('assets/img/usuario.png') }}" /></a>
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up"
                 aria-labelledby="navbarDropdownUserImage">
+                <a class="dropdown-item" href="{{ route('profile', ['id' => Auth()->user()->id]) }}">
+                    <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
+                    Mi perfil
+                </a>
                 <a class="dropdown-item" href="#!">
                     <div class="dropdown-item-icon">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                            <i data-feather="log-out"></i>
-                            {{ __('Logout') }}
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i data-feather="log-out" class="me-1"></i>
+                            <span>{{ __('Logout') }}</span>
                         </a>
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>

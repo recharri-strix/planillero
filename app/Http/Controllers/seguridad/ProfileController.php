@@ -36,11 +36,11 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:190',
             'email' => 'required|string|email|max:255|unique:users,email,' . $request->id,
+            'telefono' => 'nullable|string|max:50',
+            'dni' => 'nullable|string|max:10',
         ]);
 
         $user = user::find($request->id);
-        // $validated['password'] = Hash::make('12345678');
-        // $validated['cambio_password'] = 1;
 
         foreach ($validated as $key => $value) {
             $user->$key = $value;

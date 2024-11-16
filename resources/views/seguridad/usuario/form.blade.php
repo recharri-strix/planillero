@@ -16,20 +16,28 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-2">
+        <label class="small mb-1" for="telefono">Telefono </label>
+        <input class="form-control" id="telefono" name="telefono" type="telefono" placeholder="Ingrese su telefono"
+            value="{{ old('telefono', $user->telefono) }}" />
+    </div>
+    <div class="col-md-2">
+        <label class="small mb-1" for="dni">Dni</label>
+        <input class="form-control" id="dni" name="dni" type="dni" placeholder="Ingrese su dni"
+            value="{{ old('dni', $user->dni) }}" />
+    </div>
+    <div class="col-md-2">
+        <label class="small mb-1" for="tipo">Tipo</label>
+        <input class="form-control" id="tipo" name="tipo" type="tipo" placeholder="Ingrese su tipo"
+            value="{{ old('tipo', $user->tipo) }}" />
+    </div>
+    <div class="col-md-5">
         <label class="small mb-1">Perfil/es</label>
         <select name="perfil_id[]" class="form-control" id="perfil_id" multiple>
         </select>
     </div>
     <div class="col-md-6">
-        <label class="small mb-1">Centro</label>
-        <select name="centro_id" class="form-select" id="centro_id">
-            @foreach ($centros as $data)
-                <option value="{{ $data->id }}"
-                    {{ $data->id == old('centro_id', $user->centro_id) ? 'selected' : '' }}>
-                    {{ $data->nombre }}</option>
-            @endforeach
-        </select>
+
 
         <div class="form-check form-switch pt-3">
             <input class="form-check-input" type="checkbox" role="switch" name="blanquear" id="blanquear" >
