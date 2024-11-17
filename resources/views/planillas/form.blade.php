@@ -74,5 +74,5 @@
     <textarea class="form-control" id="novedades" name="novedades">{{ old('novedades', $planilla->novedades ?? '') }}</textarea>
 
     @if ($planilla->estado_id <> 2) 
-        <button class="form-control btn btn-primary mt-3" type="submit">Guardar</button>
+        <button class="form-control btn btn-primary mt-3" type="submit" name="guardar">Guardar</button>
     @endif

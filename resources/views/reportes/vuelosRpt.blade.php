@@ -82,10 +82,10 @@ footer {
 <body>
     <h3>Reporte de Vuelos</h3>
     <div class="row">
-        Dirección Viento: {{ $planilla->dirViento->nombre }} - 
-            Velocidad: {{ $planilla->velViento->nombre }} - 
-            Temperatura: {{ $planilla->temperatura->nombre }} -
-            Jefe Campo: {{ $planilla->jefeCampo->name }} - 
+        Dirección Viento: {{ $planilla->dirViento?->nombre ?? 'N/A' }} - 
+            Velocidad: {{ $planilla->velViento?->nombre ?? 'N/A' }} - 
+            Temperatura: {{ $planilla->temperatura?->nombre ?? 'N/A' }} -
+            Jefe Campo: {{ $planilla->jefeCampo?->name ?? 'N/A'  }} - 
             Novedades: {{ $planilla->novedades }}</div>
     </div>
     
@@ -113,20 +113,20 @@ footer {
             @foreach ($vuelos as $vuelo)
             <tr>
                 <td>{{ $vuelo->id }}</td>
-                <td>{{ $vuelo->tema->nombre ?? 'N/A' }}</td>
-                <td>{{ $vuelo->instructor->name ?? 'N/A' }}</td>
-                <td>{{ $vuelo->piloto->name ?? 'N/A' }}</td>
-                <td>{{ $vuelo->planeador->nombre ?? 'N/A' }}</td>
+                <td>{{ $vuelo->tema?->nombre ?? 'N/A' }}</td>
+                <td>{{ $vuelo->instructor?->name ?? 'N/A' }}</td>
+                <td>{{ $vuelo->piloto?->name ?? 'N/A' }}</td>
+                <td>{{ $vuelo->planeador?->nombre ?? 'N/A' }}</td>
                 <td>{{ $vuelo->decolaje ? \Carbon\Carbon::parse($vuelo->decolaje)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->corte ? \Carbon\Carbon::parse($vuelo->corte)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->hora_remolque }}</td>
                 <td>{{ $vuelo->aterrizaje ? \Carbon\Carbon::parse($vuelo->aterrizaje)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->hora_librado }}</td>
-                <td>{{ $vuelo->avion->nombre ?? 'N/A' }}</td>
+                <td>{{ $vuelo->avion?->nombre ?? 'N/A' }}</td>
                 <td>{{ $vuelo->aterrizaje_avion ? \Carbon\Carbon::parse($vuelo->aterrizaje_avion)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->hora_parcial }}</td>
-                <td>{{ $vuelo->remolcador->name ?? 'N/A' }}</td>
-                <td>{{ $vuelo->tipoPago->nombre ?? 'N/A' }}</td>
+                <td>{{ $vuelo->remolcador?->name ?? 'N/A' }}</td>
+                <td>{{ $vuelo->tipoPago?->nombre ?? 'N/A' }}</td>
             </tr>
             @endforeach
         </tbody>

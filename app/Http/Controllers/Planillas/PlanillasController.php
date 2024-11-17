@@ -75,11 +75,6 @@ class PlanillasController extends Controller
 
     public function store(Request $request)
     {
-        // if($request->has('anular')) {
-
-        // }
-
-        // Validar datos
         $validatedData = $request->validate([
             'fecha' => 'required|date',
             'jefe_campo_id' => 'required|exists:users,id',
@@ -91,7 +86,6 @@ class PlanillasController extends Controller
             'novedades' => 'nullable|string|max:1000'
         ]);
 
-        // valido que no se ingrese una planilla para un día existente
         $fecha = $request->fecha;
         $startOfDay = Carbon::parse($fecha)->startOfDay();
         $endOfDay = Carbon::parse($fecha)->endOfDay();
@@ -109,6 +103,19 @@ class PlanillasController extends Controller
         // Crear o actualizar planilla
         if ($request->id) {
             $planilla = Planilla::findOrFail($request->id);
+            if ($request->has('finalizar')) {
+                $puedeFinalizar = vuelo::where(function ($query) {
+                    $query->where('estado_id', 1)
+                        ->orWhereNull('estado_id');
+                })
+                ->where('planilla_id', $request->id)
+                ->count() == 0;
+                if (!$puedeFinalizar) {
+                    return back()->with('error', 'No se puede finalizar la planilla, porque existen vuelos sin finalizar.');
+                }
+        
+                $planilla->estado_id = 2;            
+            }
         } else {
             $planilla = new Planilla();
         }
@@ -147,22 +154,22 @@ class PlanillasController extends Controller
         return view('planillas.index', compact('planillas', 'jefeCampos', 'jefe_campo_id', 'fecha'));
     }
     
-    public function finalizar(int $id)
-    {
-        $puedeFinalizar = vuelo::where(function ($query) {
-            $query->where('estado_id', 1)
-                ->orWhereNull('estado_id');
-        })
-        ->where('planilla_id', $id)
-        ->count() == 0;
-        if (!$puedeFinalizar) {
-            return back()->with('error', 'No se puede finalizar la planilla, porque existen vuelos sin finalizar.');
-        }
+    // public function finalizar(int $id)
+    // {
+    //     $puedeFinalizar = vuelo::where(function ($query) {
+    //         $query->where('estado_id', 1)
+    //             ->orWhereNull('estado_id');
+    //     })
+    //     ->where('planilla_id', $id)
+    //     ->count() == 0;
+    //     if (!$puedeFinalizar) {
+    //         return back()->with('error', 'No se puede finalizar la planilla, porque existen vuelos sin finalizar.');
+    //     }
         
-        $planilla = planilla::find($id);
-        $planilla->estado_id = 2;
-        $planilla->save();
+    //     $planilla = planilla::find($id);
+    //     $planilla->estado_id = 2;
+    //     $planilla->save();
 
-        return redirect()->route('planillas.index', $planilla->planilla_id)->with('success', 'planilla Finalizado correctamente.');
-    }
+    //     return redirect()->route('planillas.index', $planilla->planilla_id)->with('success', 'planilla Finalizado correctamente.');
+    // }
 }

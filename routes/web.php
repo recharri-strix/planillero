@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/planillas/store/{id?}', [PlanillasController::class, 'store'])->name('planillas.store');
     Route::get('/planillas/{id}/vuelos', [PlanillasController::class, 'vuelos'])->name('planillas.vuelos');
     route::get('/planillas/filtrar', [PlanillasController::class, 'filtrar'])->name('planillas.filtrar');
-    Route::post('/planillas/finalizar/{id}', [PlanillasController::class, 'finalizar'])->name('planillas.finalizar');
+    // Route::post('/planillas/finalizar/{id}', [PlanillasController::class, 'finalizar'])->name('planillas.finalizar');
 
     Route::get('/vuelos/nueva/{id}', [VuelosController::class, 'nueva'])->name('vuelos.nueva');
     Route::get('/vuelos/{id}/vuelos', [VuelosController::class, 'index'])->name('vuelos.index');
