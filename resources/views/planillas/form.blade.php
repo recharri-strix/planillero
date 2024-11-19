@@ -71,7 +71,7 @@
     </select>
 
     <label for="novedades">Novedades:</label>
-    <textarea class="form-control" id="novedades" name="novedades">{{ old('novedades', $planilla->novedades ?? '') }}</textarea>
+    <textarea class="form-control" id="novedades" name="novedades" rows="10">{{ old('novedades', $planilla->novedades ?? '') }}</textarea>
 
     @if ($planilla->estado_id <> 2) 
         <button class="form-control btn btn-primary mt-3" type="submit" name="guardar">Guardar</button>
