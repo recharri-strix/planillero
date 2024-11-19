@@ -132,7 +132,7 @@ footer {
         </tbody>
     </table>
     <footer>
-        &copy; {{ date('Y') }} Planillero de vuelos. Todos los derechos reservados.
+        &copy; {{ date('Y') }} Planillero de vuelos. Todos los derechos reservados. CPLP
     </footer>
 </body>
 </html>
