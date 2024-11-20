@@ -61,7 +61,7 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    align: center;
+    text-align: center;
 }
 
 tr:nth-child(even) {
