@@ -80,7 +80,6 @@ footer {
 </style> 
 </head>
 <body>
-    <!-- <h3>Reporte de Vuelos</h3> -->
     <div class="row">
         <table>
         <tr>
@@ -103,14 +102,59 @@ footer {
         </tr>
     </table>
     </div>
-    
     <table>
+        <tbody>
+          <tr>
+            <td>Nro</td>
+            <td>Piloto</td>
+            <td>Alum/Inst/Pasj</td>
+            <td>Tema</td>
+            <td>Planeador</td>
+            <td>Avion</td>
+            <td>Remolcador</td>
+            <td>Tipo  Pago</td>
+            <td>Pago</td>
+          </tr>
+          <tr>
+            <td>Matricula</td>
+            <td>Decolaje</td>
+            <td>Corte</td>
+            <td>Remolque</td>
+            <td>Aterrizaje</td>
+            <td>Librado</td>
+            <td>Matricula</td>
+            <td>Aterrizaje</td>
+            <td>Parcial</td>
+            <td>Total</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+          </tr>
+        </tbody>
+    </table>
+    <!--<table>
         <thead>
             <tr>
                 <th>Nro</th>
-                <th>Tema</th>
-                <th>Instructor</th>
                 <th>Piloto</th>
+                <th>Alum/Inst/Pasj</th>
+                <th>Tema</th>
                 <th>Planeador</th>
                 <th>Decolaje</th>
                 <th>Corte</th>
@@ -122,15 +166,16 @@ footer {
                 <th>Parcial</th>
                 <th>Remolcador</th>
                 <th>Tipo de Pago</th>
+                <th>Pago</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($vuelos as $vuelo)
             <tr>
                 <td>{{ $vuelo->id }}</td>
-                <td>{{ $vuelo->tema?->nombre ?? 'N/A' }}</td>
-                <td>{{ $vuelo->instructor?->name ?? 'N/A' }}</td>
                 <td>{{ $vuelo->piloto?->name ?? 'N/A' }}</td>
+                <td>{{ $vuelo->instructor?->name ?? 'N/A' }}</td>
+                <td>{{ $vuelo->tema?->nombre ?? 'N/A' }}</td>
                 <td>{{ $vuelo->planeador?->nombre ?? 'N/A' }}</td>
                 <td>{{ $vuelo->decolaje ? \Carbon\Carbon::parse($vuelo->decolaje)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->corte ? \Carbon\Carbon::parse($vuelo->corte)->format('H:i') : '' }}</td>
@@ -145,7 +190,7 @@ footer {
             </tr>
             @endforeach
         </tbody>
-    </table>
+    </table> -->
     <footer>
         &copy; {{ date('Y-m-d') }} CPLP
     </footer>
