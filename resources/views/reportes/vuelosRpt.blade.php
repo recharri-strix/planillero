@@ -83,10 +83,10 @@ footer {
     <h3>Reporte de Vuelos</h3>
     <div class="row">
         Dirección Viento: {{ $planilla->dirViento?->nombre ?? 'N/A' }} - 
-            Velocidad: {{ $planilla->velViento?->nombre ?? 'N/A' }} - 
-            Temperatura: {{ $planilla->temperatura?->nombre ?? 'N/A' }} -
-            Jefe Campo: {{ $planilla->jefeCampo?->name ?? 'N/A'  }} - 
-            Novedades: {{ $planilla->novedades }}</div>
+        Velocidad: {{ $planilla->velViento?->nombre ?? 'N/A' }} - 
+        Temperatura: {{ $planilla->temperatura?->nombre ?? 'N/A' }} -
+        Jefe Campo: {{ $planilla->jefeCampo?->name ?? 'N/A'  }} - 
+        Novedades: {{ $planilla->novedades }}
     </div>
     
     <table>
@@ -132,7 +132,7 @@ footer {
         </tbody>
     </table>
     <footer>
-        &copy; {{ date('Y') }} Planillero de vuelos. Todos los derechos reservados. CPLP
+        &copy; {{ date('Y-m-d') }} CPLP
     </footer>
 </body>
 </html>
