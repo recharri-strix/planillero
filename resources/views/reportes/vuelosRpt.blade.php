@@ -94,15 +94,15 @@ footer {
         </tr>
         <tr>
             <td><strong>Planilla de Vuelo N°:</strong> {{ $planilla->id }}</td>
-            <td><strong>Viento:</strong> {{ $planilla->dirViento?->nombre ?? 'N/A' }} <strong>Velocidad:</strong> {{ $planilla->velViento?->nombre ?? 'N/A' }}</td>
+            <td><strong>Viento:</strong> {{ $planilla->dirViento?->nombre ?? 'N/A' }} <strong>Velocidad:</strong> {{ $planilla->velViento?->nombre ?? 'N/A' }}km7h</td>
         </tr>
         <tr>
             <td><strong>Lugar y Fecha:</strong> Gómez, {{ $planilla->fecha }}</td>
-            <td><strong>Temperatura:</strong> {{ $planilla->temperatura?->nombre ?? 'N/A' }}</td>
+            <td><strong>Temperatura:</strong> {{ $planilla->temperatura?->nombre ?? 'N/A' }}°C</td>
         </tr>
         <tr>
             <td><strong>Jefe de Campo:</strong> {{ $planilla->jefeCampo?->name ?? 'N/A'  }}</strong></td>
-            <td><strong>Nubes:</strong> {{ $planilla->nubes?->nombre ?? 'N/A' }}<strong>Plafond:</strong> {{ $planilla->plafon?->nombre ?? 'N/A' }}</td>
+            <td><strong>Nubes:</strong> {{ $planilla->nubes?->nombre ?? 'N/A' }}<strong>Plafond:</strong> {{ $planilla->plafon?->nombre ?? 'N/A' }}m</td>
         </tr>
     </table>
     </div>
