@@ -82,19 +82,13 @@ footer {
 <body>
     <!-- <h3>Reporte de Vuelos</h3> -->
     <div class="row">
-        <!-- Dirección Viento: {{ $planilla->dirViento?->nombre ?? 'N/A' }} - 
-        Velocidad: {{ $planilla->velViento?->nombre ?? 'N/A' }} - 
-        Temperatura: {{ $planilla->temperatura?->nombre ?? 'N/A' }} -
-        Jefe Campo: {{ $planilla->jefeCampo?->name ?? 'N/A'  }} - 
-        Novedades: {{ $planilla->novedades }} -->
-
         <table>
         <tr>
             <td colspan="2"><strong>Planeadores La Plata</strong></td>
         </tr>
         <tr>
             <td><strong>Planilla de Vuelo N°:</strong> {{ $planilla->id }}</td>
-            <td><strong>Viento:</strong> {{ $planilla->dirViento?->nombre ?? 'N/A' }} <strong>Velocidad:</strong> {{ $planilla->velViento?->nombre ?? 'N/A' }}km7h</td>
+            <td><strong>Viento:</strong> {{ $planilla->dirViento?->nombre ?? 'N/A' }} <strong>Velocidad:</strong> {{ $planilla->velViento?->nombre ?? 'N/A' }} km/h</td>
         </tr>
         <tr>
             <td><strong>Lugar y Fecha:</strong> Gómez, {{ $planilla->fecha }}</td>
@@ -102,7 +96,10 @@ footer {
         </tr>
         <tr>
             <td><strong>Jefe de Campo:</strong> {{ $planilla->jefeCampo?->name ?? 'N/A'  }}</strong></td>
-            <td><strong>Nubes:</strong> {{ $planilla->nubes?->nombre ?? 'N/A' }}<strong>Plafond:</strong> {{ $planilla->plafon?->nombre ?? 'N/A' }}m</td>
+            <td><strong>Nubes:</strong> {{ $planilla->nubes?->nombre ?? 'N/A' }}<strong> Plafond:</strong> {{ $planilla->plafon?->nombre ?? 'N/A' }}m</td>
+        </tr>
+        <tr>
+            <td colspan="2">Novedades: {{ $planilla->novedades }}</td>
         </tr>
     </table>
     </div>
