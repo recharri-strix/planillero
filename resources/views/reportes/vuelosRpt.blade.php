@@ -127,12 +127,13 @@ footer {
             <td text-align="center">Parcial</td>
             <td text-align="center">Total</td>
           </tr>
+          @foreach ($vuelos as $vuelo)
           <tr>
             <td>{{ $vuelo->id }}</td>
             <td>{{ $vuelo->piloto?->name ?? 'N/A' }}</td>
             <td>{{ $vuelo->instructor?->name ?? 'N/A' }}</td>
-            <td>3</td>
-            <td>4</td>
+            <td>{{ $vuelo->tema?->nombre ?? 'N/A' }}</td>
+            <td>{{ $vuelo->planeador?->nombre ?? 'N/A' }}</td>
             <td>5</td>
             <td>6</td>
             <td>7</td>
@@ -146,6 +147,7 @@ footer {
             <td>15</td>
             <td>16</td>
           </tr>
+          @endforeach
         </tbody>
     </table>
     <!--<table>
