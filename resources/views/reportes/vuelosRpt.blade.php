@@ -61,7 +61,6 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    text-align: center;
 }
 
 tr:nth-child(even) {
@@ -106,32 +105,32 @@ footer {
     <table>
         <tbody>
           <tr>
-            <td rowspan="2">Nro</td>
-            <td rowspan="2">Piloto</td>
-            <td rowspan="2">Alum/Inst/Pasj</td>
-            <td rowspan="2">Tema</td>
-            <td colspan="6">Planeador</td>
-            <td colspan="4">Avion</td>
-            <td rowspan="2">Remolcador</td>
-            <td rowspan="2">Tipo  Pago</td>
-            <td rowspan="2">Pago</td>
+            <td rowspan="2" text-align="center">Nro</td>
+            <td rowspan="2" text-align="center">Piloto</td>
+            <td rowspan="2" text-align="center">Alum/Inst/Pasj</td>
+            <td rowspan="2" text-align="center">Tema</td>
+            <td colspan="6" text-align="center">Planeador</td>
+            <td colspan="4" text-align="center">Avion</td>
+            <td rowspan="2" text-align="center">Remolcador</td>
+            <td rowspan="2" text-align="center">Tipo  Pago</td>
+            <td rowspan="2" text-align="center">Pago</td>
           </tr>
           <tr>
-            <td>Matricula</td>
-            <td>Decolaje</td>
-            <td>Corte</td>
-            <td>Remolque</td>
-            <td>Aterrizaje</td>
-            <td>Librado</td>
-            <td>Matricula</td>
-            <td>Aterrizaje</td>
-            <td>Parcial</td>
-            <td>Total</td>
+            <td text-align="center">Matricula</td>
+            <td text-align="center">Decolaje</td>
+            <td text-align="center">Corte</td>
+            <td text-align="center">Remolque</td>
+            <td text-align="center">Aterrizaje</td>
+            <td text-align="center">Librado</td>
+            <td text-align="center">Matricula</td>
+            <td text-align="center">Aterrizaje</td>
+            <td text-align="center">Parcial</td>
+            <td text-align="center">Total</td>
           </tr>
           <tr>
-            <td>1</td>
-            <td>2</td>
-            <td>2</td>
+            <td>{{ $vuelo->id }}</td>
+            <td>{{ $vuelo->piloto?->name ?? 'N/A' }}</td>
+            <td>{{ $vuelo->instructor?->name ?? 'N/A' }}</td>
             <td>3</td>
             <td>4</td>
             <td>5</td>
