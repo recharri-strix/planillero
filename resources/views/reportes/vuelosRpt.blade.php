@@ -87,15 +87,15 @@ footer {
         </tr>
         <tr>
             <td><strong>Planilla de Vuelo N°:</strong> {{ $planilla->id }}</td>
-            <td><strong>Viento:</strong> {{ $planilla->dirViento?->nombre ?? 'N/A' }} <strong>Velocidad:</strong> {{ $planilla->velViento?->nombre ?? 'N/A' }} km/h</td>
+            <td><strong>Viento:</strong> {{ $planilla->dirViento?->nombre ?? '' }} <strong>Velocidad:</strong> {{ $planilla->velViento?->nombre ?? '' }} km/h</td>
         </tr>
         <tr>
             <td><strong>Lugar y Fecha:</strong> Gómez, {{ $planilla->fecha }}</td>
-            <td><strong>Temperatura:</strong> {{ $planilla->temperatura?->nombre ?? 'N/A' }}°C</td>
+            <td><strong>Temperatura:</strong> {{ $planilla->temperatura?->nombre ?? '' }}°C</td>
         </tr>
         <tr>
-            <td><strong>Jefe de Campo:</strong> {{ $planilla->jefeCampo?->name ?? 'N/A'  }}</strong></td>
-            <td><strong>Nubes:</strong> {{ $planilla->nubes?->nombre ?? 'N/A' }}<strong> Plafond:</strong> {{ $planilla->plafon?->nombre ?? 'N/A' }}m</td>
+            <td><strong>Jefe de Campo:</strong> {{ $planilla->jefeCampo?->name ?? ''  }}</strong></td>
+            <td><strong>Nubes:</strong> {{ $planilla->nubes?->nombre ?? '' }}<strong> Plafond:</strong> {{ $planilla->plafon?->nombre ?? '' }}m</td>
         </tr>
         <tr>
             <td colspan="2">Novedades: {{ $planilla->novedades }}</td>
@@ -109,8 +109,8 @@ footer {
             <td rowspan="2" text-align="center">Piloto</td>
             <td rowspan="2" text-align="center">Alum/Inst/Pasj</td>
             <td rowspan="2" text-align="center">Tema</td>
-            <td colspan="6" text-align="center">Planeador</td>
-            <td colspan="4" text-align="center">Avion</td>
+            <td colspan="6" style="text-align:center;">Planeador</td>
+            <td colspan="3" style="text-align:center;">Avion</td>
             <td rowspan="2" text-align="center">Remolcador</td>
             <td rowspan="2" text-align="center">Tipo Pago</td>
             <td rowspan="2" text-align="center">Pago</td>
@@ -125,26 +125,26 @@ footer {
             <td text-align="center">Matricula</td>
             <td text-align="center">Aterrizaje</td>
             <td text-align="center">Parcial</td>
-            <td text-align="center">Total</td>
+            <!-- <td text-align="center">Total</td> -->
           </tr>
           @foreach ($vuelos as $vuelo)
           <tr>
             <td>{{ $vuelo->id }}</td>
-            <td>{{ $vuelo->piloto?->name ?? 'N/A' }}</td>
-            <td>{{ $vuelo->instructor?->name ?? 'N/A' }} {{ $vuelo->bau ?? 'N/A' }}</td>
-            <td>{{ $vuelo->tema?->nombre ?? 'N/A' }}</td>
-            <td>{{ $vuelo->planeador?->nombre ?? 'N/A' }}</td>
+            <td>{{ $vuelo->piloto?->name ?? '' }}</td>
+            <td>{{ $vuelo->instructor?->name ?? '' }} {{ $vuelo->bau ?? '' }}</td>
+            <td>{{ $vuelo->tema?->nombre ?? '' }}</td>
+            <td>{{ $vuelo->planeador?->nombre ?? '' }}</td>
             <td>{{ $vuelo->decolaje ? \Carbon\Carbon::parse($vuelo->decolaje)->format('H:i') : '' }}</td>
             <td>{{ $vuelo->corte ? \Carbon\Carbon::parse($vuelo->corte)->format('H:i') : '' }}</td>
             <td>{{ $vuelo->hora_remolque }}</td>
             <td>{{ $vuelo->aterrizaje ? \Carbon\Carbon::parse($vuelo->aterrizaje)->format('H:i') : '' }}</td>
             <td>{{ $vuelo->hora_librado }}</td>
-            <td>{{ $vuelo->avion?->nombre ?? 'N/A' }}</td>
+            <td>{{ $vuelo->avion?->nombre ?? '' }}</td>
             <td>{{ $vuelo->aterrizaje_avion ? \Carbon\Carbon::parse($vuelo->aterrizaje_avion)->format('H:i') : '' }}</td>
             <td>{{ $vuelo->hora_parcial }}</td>
-            <td></td>
-            <td>{{ $vuelo->remolcador?->name ?? 'N/A' }}</td>
-            <td>{{ $vuelo->tipoPago?->nombre ?? 'N/A' }}</td>
+            <!-- <td></td> -->
+            <td>{{ $vuelo->remolcador?->name ?? '' }}</td>
+            <td>{{ $vuelo->tipoPago?->nombre ?? '' }}</td>
             <td>{{ $vuelo->pago }}</td>
           </tr>
           @endforeach
@@ -175,20 +175,20 @@ footer {
             @foreach ($vuelos as $vuelo)
             <tr>
                 <td>{{ $vuelo->id }}</td>
-                <td>{{ $vuelo->piloto?->name ?? 'N/A' }}</td>
-                <td>{{ $vuelo->instructor?->name ?? 'N/A' }}</td>
-                <td>{{ $vuelo->tema?->nombre ?? 'N/A' }}</td>
-                <td>{{ $vuelo->planeador?->nombre ?? 'N/A' }}</td>
+                <td>{{ $vuelo->piloto?->name ?? '' }}</td>
+                <td>{{ $vuelo->instructor?->name ?? '' }}</td>
+                <td>{{ $vuelo->tema?->nombre ?? '' }}</td>
+                <td>{{ $vuelo->planeador?->nombre ?? '' }}</td>
                 <td>{{ $vuelo->decolaje ? \Carbon\Carbon::parse($vuelo->decolaje)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->corte ? \Carbon\Carbon::parse($vuelo->corte)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->hora_remolque }}</td>
                 <td>{{ $vuelo->aterrizaje ? \Carbon\Carbon::parse($vuelo->aterrizaje)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->hora_librado }}</td>
-                <td>{{ $vuelo->avion?->nombre ?? 'N/A' }}</td>
+                <td>{{ $vuelo->avion?->nombre ?? '' }}</td>
                 <td>{{ $vuelo->aterrizaje_avion ? \Carbon\Carbon::parse($vuelo->aterrizaje_avion)->format('H:i') : '' }}</td>
                 <td>{{ $vuelo->hora_parcial }}</td>
-                <td>{{ $vuelo->remolcador?->name ?? 'N/A' }}</td>
-                <td>{{ $vuelo->tipoPago?->nombre ?? 'N/A' }}</td>
+                <td>{{ $vuelo->remolcador?->name ?? '' }}</td>
+                <td>{{ $vuelo->tipoPago?->nombre ?? '' }}</td>
             </tr>
             @endforeach
         </tbody>
