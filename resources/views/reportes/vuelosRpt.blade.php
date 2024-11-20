@@ -131,7 +131,7 @@ footer {
           <tr>
             <td>{{ $vuelo->id }}</td>
             <td>{{ $vuelo->piloto?->name ?? 'N/A' }}</td>
-            <td>{{ $vuelo->instructor?->name {{ $vuelo->bau }}?? 'N/A' }}</td>
+            <td>{{ $vuelo->instructor?->name ?? 'N/A' }} {{ $vuelo->bau ?? 'N/A' }}</td>
             <td>{{ $vuelo->tema?->nombre ?? 'N/A' }}</td>
             <td>{{ $vuelo->planeador?->nombre ?? 'N/A' }}</td>
             <td>{{ $vuelo->decolaje ? \Carbon\Carbon::parse($vuelo->decolaje)->format('H:i') : '' }}</td>
