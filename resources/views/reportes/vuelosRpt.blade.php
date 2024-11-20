@@ -105,15 +105,15 @@ footer {
     <table>
         <tbody>
           <tr>
-            <td>Nro</td>
-            <td>Piloto</td>
-            <td>Alum/Inst/Pasj</td>
-            <td>Tema</td>
-            <td>Planeador</td>
-            <td>Avion</td>
-            <td>Remolcador</td>
-            <td>Tipo  Pago</td>
-            <td>Pago</td>
+            <td rowspan="2">Nro</td>
+            <td rowspan="2">Piloto</td>
+            <td rowspan="2">Alum/Inst/Pasj</td>
+            <td rowspan="2">Tema</td>
+            <td colspan="6">Planeador</td>
+            <td colspan="4">Avion</td>
+            <td rowspan="2">Remolcador</td>
+            <td rowspan="2">Tipo  Pago</td>
+            <td rowspan="2">Pago</td>
           </tr>
           <tr>
             <td>Matricula</td>
