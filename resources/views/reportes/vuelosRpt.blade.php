@@ -61,6 +61,7 @@ td {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    align: center;
 }
 
 tr:nth-child(even) {
@@ -105,27 +106,27 @@ footer {
     <table>
         <tbody>
           <tr>
-            <td rowspan="2" align="center">Nro</td>
-            <td rowspan="2" align="center">Piloto</td>
-            <td rowspan="2" align="center">Alum/Inst/Pasj</td>
-            <td rowspan="2" align="center">Tema</td>
-            <td colspan="6" align="center">Planeador</td>
-            <td colspan="4" align="center">Avion</td>
-            <td rowspan="2" align="center">Remolcador</td>
-            <td rowspan="2" align="center">Tipo  Pago</td>
-            <td rowspan="2" align="center">Pago</td>
+            <td rowspan="2">Nro</td>
+            <td rowspan="2">Piloto</td>
+            <td rowspan="2">Alum/Inst/Pasj</td>
+            <td rowspan="2">Tema</td>
+            <td colspan="6">Planeador</td>
+            <td colspan="4">Avion</td>
+            <td rowspan="2">Remolcador</td>
+            <td rowspan="2">Tipo  Pago</td>
+            <td rowspan="2">Pago</td>
           </tr>
           <tr>
-            <td align="center">Matricula</td>
-            <td align="center">Decolaje</td>
-            <td align="center">Corte</td>
-            <td align="center">Remolque</td>
-            <td align="center">Aterrizaje</td>
-            <td align="center">Librado</td>
-            <td align="center">Matricula</td>
-            <td align="center">Aterrizaje</td>
-            <td align="center">Parcial</td>
-            <td align="center">Total</td>
+            <td>Matricula</td>
+            <td>Decolaje</td>
+            <td>Corte</td>
+            <td>Remolque</td>
+            <td>Aterrizaje</td>
+            <td>Librado</td>
+            <td>Matricula</td>
+            <td>Aterrizaje</td>
+            <td>Parcial</td>
+            <td>Total</td>
           </tr>
           <tr>
             <td>1</td>
