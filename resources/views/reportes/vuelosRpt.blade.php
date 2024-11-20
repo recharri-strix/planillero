@@ -90,27 +90,19 @@ footer {
 
         <table>
         <tr>
-            <td colspan="3"><strong>Planeadores La Plata</strong></td>
+            <td colspan="2"><strong>Planeadores La Plata</strong></td>
         </tr>
         <tr>
             <td><strong>Planilla de Vuelo N°:</strong> {{ $planilla->id }}</td>
-            <td></td>
-            <td></td>
+            <td><strong>Viento:</strong> {{ $planilla->dirViento?->nombre ?? 'N/A' }} <strong>Velocidad:</strong> {{ $planilla->velViento?->nombre ?? 'N/A' }}</td>
         </tr>
         <tr>
             <td><strong>Lugar y Fecha:</strong> Gómez, {{ $planilla->fecha }}</td>
-            <td></td>
-            <td></td>
+            <td><strong>Temperatura:</strong> {{ $planilla->temperatura?->nombre ?? 'N/A' }}</td>
         </tr>
         <tr>
             <td><strong>Jefe de Campo:</strong> {{ $planilla->jefeCampo?->name ?? 'N/A'  }}</strong></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><strong>Nubes:</strong> {{ $planilla->nubes?->nombre ?? 'N/A' }}<strong>Plafond:</strong> {{ $planilla->plafon?->nombre ?? 'N/A' }}</td>
         </tr>
     </table>
     </div>
