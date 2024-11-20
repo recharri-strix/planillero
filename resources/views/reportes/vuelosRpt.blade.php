@@ -90,7 +90,7 @@ footer {
             <td><strong>Viento:</strong> {{ $planilla->dirViento?->nombre ?? '' }} <strong>Velocidad:</strong> {{ $planilla->velViento?->nombre ?? '' }} km/h</td>
         </tr>
         <tr>
-            <td><strong>Lugar y Fecha:</strong> Gómez, {{ $planilla->fecha }}</td>
+            <td><strong>Lugar y Fecha:</strong> Gómez, {{ $planilla->fecha ? \Carbon\Carbon::parse($planilla->fecha)->format('YYYY-MM-DDThh') : ''}}</td>
             <td><strong>Temperatura:</strong> {{ $planilla->temperatura?->nombre ?? '' }}°C</td>
         </tr>
         <tr>
