@@ -80,7 +80,7 @@ footer {
 </style> 
 </head>
 <body>
-    <h3>Reporte de Vuelos</h3>
+    <!-- <h3>Reporte de Vuelos</h3> -->
     <div class="row">
         <!-- Dirección Viento: {{ $planilla->dirViento?->nombre ?? 'N/A' }} - 
         Velocidad: {{ $planilla->velViento?->nombre ?? 'N/A' }} - 
@@ -93,23 +93,23 @@ footer {
             <td colspan="3"><strong>Planeadores La Plata</strong></td>
         </tr>
         <tr>
-            <td><strong>Planilla de Vuelo N°:</strong> 1537</td>
-            <td><strong>Lugar y Fecha:</strong> Gómez, 19/09/2021</td>
-            <td><strong>Jefe de Campo:</strong> Ricardo Ramos</td>
+            <td><strong>Planilla de Vuelo N°:</strong> {{ $planilla->id }}</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <td><strong>Instructor:</strong> Basilico J., Gianneschini M.</td>
-            <td><strong>Remolcador:</strong> 1. Gianneschini M., 2. Basilico</td>
-            <td><strong>Avión:</strong> LV-GFJ</td>
+            <td><strong>Lugar y Fecha:</strong> Gómez, {{ $planilla->fecha }}</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <td><strong>Meteorología:</strong></td>
-            <td><strong>Viento:</strong> 050°, <strong>Velocidad:</strong> 23,4 km/h</td>
-            <td><strong>Temperatura:</strong> 17°C, <strong>Presión:</strong> 1015 mb</td>
+            <td><strong>Jefe de Campo:</strong> {{ $planilla->jefeCampo?->name ?? 'N/A'  }}</strong></td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-            <td><strong>Nubes:</strong> 1/8</td>
-            <td><strong>Plafond:</strong> 600 m</td>
+            <td></td>
+            <td></td>
             <td></td>
         </tr>
     </table>
