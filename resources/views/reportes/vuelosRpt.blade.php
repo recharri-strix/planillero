@@ -99,9 +99,9 @@
                 <td><strong>Jefe de Campo:</strong> {{ $planilla->jefeCampo?->name ?? ''  }}</strong></td>
                 <td><strong>Nubes:</strong> {{ $planilla->nubes?->nombre ?? '' }}<strong> Plafond:</strong> {{ $planilla->plafon?->nombre ?? '' }}m</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td colspan="2">Novedades: {{ $planilla->novedades }}</td>
-            </tr>
+            </tr> -->
         </table>
     </div>
     <table>
@@ -155,7 +155,9 @@
     <div class="row">
         <table>
             <tr>
-                <td>Novedades: {{ $planilla->novedades }}</td>
+                <td>
+                    <pre><strong>Novedades:</strong><br>{{ $planilla->novedades }}</pre>
+                </td>
             </tr>
         </table>
     </div>
