@@ -51,7 +51,9 @@
                                                             ? 'badge rounded-pill bg-danger'
                                                             : '') }}
                                                         ">{{ $item->id }}</span>
+                                            @if ($item->decolaje != null)
                                             🛩️
+                                            @endif
                                         </h3>
                                     </td>
                                     <td class="d-none d-md-table-cell">{{ $item->tema_nombre }}</td>
