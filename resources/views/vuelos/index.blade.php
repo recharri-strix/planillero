@@ -51,7 +51,7 @@
                                                             ? 'badge rounded-pill bg-danger'
                                                             : '') }}
                                                         ">{{ $item->id }}</span>
-                                            @if ($item->decolaje != null)
+                                            @if ($item->decolaje != null && $item->aterrizaje_avion == null)
                                             🛩️
                                             @endif
                                         </h3>
